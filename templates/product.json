@@ -20,25 +20,6 @@
             "link": ""
           }
         },
-        "trust_badges_inline_kBebGr": {
-          "type": "trust_badges_inline",
-          "settings": {
-            "text_1": "Free Shipping",
-            "text_2": "30-Day Guarantee",
-            "text_3": "Secure Checkout",
-            "text_4": ""
-          }
-        },
-        "product_bullet_list_xkLijN": {
-          "type": "product_bullet_list",
-          "settings": {
-            "text_1": "Premium quality ingredients",
-            "text_2": "Science-backed formula",
-            "text_3": "30-day money-back guarantee",
-            "text_4": "",
-            "text_5": ""
-          }
-        },
         "vendor": {
           "type": "text",
           "settings": {
@@ -57,9 +38,26 @@
             "text_style": "subtitle"
           }
         },
+        "trust_badges_inline_kBebGr": {
+          "type": "trust_badges_inline",
+          "settings": {
+            "text_1": "Free Shipping",
+            "text_2": "30-Day Guarantee",
+            "text_3": "Secure Checkout",
+            "text_4": ""
+          }
+        },
         "price": {
           "type": "price",
           "settings": {}
+        },
+        "selling_out_indicator_MYPNwe": {
+          "type": "selling_out_indicator",
+          "settings": {
+            "threshold": 20,
+            "text": "Only {count} left in stock",
+            "bar_color": "#00e5ff"
+          }
         },
         "variant_picker": {
           "type": "variant_picker",
@@ -67,10 +65,6 @@
             "picker_type": "button",
             "swatch_shape": "circle"
           }
-        },
-        "quantity_selector": {
-          "type": "quantity_selector",
-          "settings": {}
         },
         "buy_buttons": {
           "type": "buy_buttons",
@@ -84,6 +78,16 @@
           "settings": {
             "show_title": true,
             "show_price": true
+          }
+        },
+        "product_bullet_list_xkLijN": {
+          "type": "product_bullet_list",
+          "settings": {
+            "text_1": "Premium quality ingredients",
+            "text_2": "Science-backed formula",
+            "text_3": "30-day money-back guarantee",
+            "text_4": "",
+            "text_5": ""
           }
         },
         "description": {
@@ -135,16 +139,16 @@
       },
       "block_order": [
         "rating_summary_rbq4Vm",
-        "trust_badges_inline_kBebGr",
-        "product_bullet_list_xkLijN",
         "vendor",
         "title",
         "caption",
+        "trust_badges_inline_kBebGr",
         "price",
+        "selling_out_indicator_MYPNwe",
         "variant_picker",
-        "quantity_selector",
         "buy_buttons",
         "sticky_atc_yL87AR",
+        "product_bullet_list_xkLijN",
         "description",
         "collapsible-row-0",
         "collapsible-row-1",
