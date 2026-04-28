@@ -268,7 +268,111 @@ h4, .h4 {
 }
 
 /* ============================================================
-   9. CONTAINER UTILITY
+   9. HEADER — ELIXIR STICKY GLASSMORPHISM
+   ============================================================ */
+
+/* Base: dark background with smooth transitions */
+.header-wrapper {
+  background-color: var(--color-elixir-bg);
+  border-bottom: 1px solid transparent;
+  transition: background-color 300ms ease,
+              backdrop-filter 300ms ease,
+              -webkit-backdrop-filter 300ms ease,
+              border-color 300ms ease;
+}
+
+/* Transparent variant — set via section setting */
+.header-wrapper.header--transparent {
+  background-color: transparent;
+  border-bottom-color: transparent;
+}
+
+/* Scrolled state — glassmorphism kicks in after 50px */
+.header-wrapper.elixir-header--scrolled {
+  background-color: rgba(0, 0, 0, 0.85) !important;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom-color: var(--color-elixir-border) !important;
+}
+
+/* Also apply glassmorphism when Dawn marks header as sticky */
+.shopify-section-header-sticky .header-wrapper {
+  background-color: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--color-elixir-border);
+}
+
+/* Hide Dawn's default border-bottom line separator in favour of ours */
+.header-wrapper--border-bottom {
+  border-bottom: 1px solid var(--color-elixir-border) !important;
+}
+
+/* --- Header text & icon colours --- */
+.header .header__heading-link,
+.header .header-menu-item,
+.header .list-menu__item--link,
+.header .header__icon {
+  color: var(--color-elixir-text);
+}
+
+.header .header__icon svg {
+  fill: var(--color-elixir-text);
+}
+
+/* Shop name text fallback (when no logo image) */
+.header__heading-link .h2 {
+  color: var(--color-elixir-text);
+  font-family: var(--font-inter);
+  font-weight: var(--font-weight-extrabold);
+}
+
+/* --- Nav links: animated underline on hover --- */
+.header__inline-menu .list-menu__item--link {
+  position: relative;
+  text-decoration: none;
+  color: var(--color-elixir-text);
+  transition: color var(--transition-base);
+}
+
+.header__inline-menu .list-menu__item--link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: var(--color-accent);
+  border-radius: var(--radius-pill);
+  transition: width var(--transition-base);
+}
+
+.header__inline-menu .list-menu__item--link:hover,
+.header__inline-menu .list-menu__item--link:focus-visible {
+  color: var(--color-accent);
+}
+
+.header__inline-menu .list-menu__item--link:hover::after,
+.header__inline-menu .list-menu__item--link:focus-visible::after {
+  width: 100%;
+}
+
+/* --- Cart count bubble — accent colour --- */
+.cart-count-bubble {
+  background-color: var(--color-accent);
+  color: var(--color-btn-primary-text);
+}
+
+/* --- Dropdown / mega menu dark background --- */
+.header__submenu,
+.mega-menu__content {
+  background-color: var(--color-elixir-bg-2);
+  border: 1px solid var(--color-elixir-border);
+  border-radius: var(--radius-md);
+}
+
+/* ============================================================
+   10. CONTAINER UTILITY
    ============================================================ */
 
 .elixir-container {
