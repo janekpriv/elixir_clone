@@ -51,18 +51,18 @@
 {%- endstyle -%}
 
 <div
-  class="store-features store-features-{{ section.id }} animate-on-scroll"
+  class="store-features store-features-{{ section.id }}"
   aria-label="{{ section.settings.heading | default: 'Store features' | escape }}"
 >
   <div class="page-width">
 
     {%- if section.settings.heading != blank -%}
-      <h2 class="store-features__heading elixir-section-heading">
+      <h2 class="store-features__heading elixir-section-heading animate-on-scroll">
         {{ section.settings.heading }}
       </h2>
     {%- endif -%}
 
-    <ul class="store-features__grid {{ align_class }} store-features__grid--{{ section.settings.layout }} list-unstyled">
+    <ul class="store-features__grid {{ align_class }} store-features__grid--{{ section.settings.layout }} list-unstyled animate-on-scroll">
 
       {%- for block in section.blocks -%}
         {%- if block.type == 'feature' -%}
