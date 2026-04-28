@@ -3595,3 +3595,88 @@ details-disclosure > details {
     transform: translateX(100%) scaleX(0);
   }
 }
+
+/* ELIXIR DESIGN SYSTEM */
+
+:root {
+  /* --- Backgrounds --- */
+  --color-elixir-bg:            #0a0a0a;
+  --color-elixir-bg-2:          #111111;
+  --color-elixir-bg-card:       #161616;
+  --color-elixir-surface:       rgba(255, 255, 255, 0.04);
+
+  /* --- Accents --- */
+  --color-accent:               #00e5ff;
+  --color-accent-hover:         #00b8cc;
+  --color-accent-glow:          rgba(0, 229, 255, 0.15);
+
+  /* --- Text --- */
+  --color-elixir-text:          #ffffff;
+  --color-elixir-text-secondary: #a0a0a0;
+  --color-elixir-text-muted:    #555555;
+
+  /* --- Borders / Dividers --- */
+  --color-elixir-border:        rgba(255, 255, 255, 0.08);
+  --color-border-accent:        rgba(0, 229, 255, 0.3);
+
+  /* --- Buttons --- */
+  --color-btn-primary:          #00e5ff;
+  --color-btn-primary-text:     #000000;
+  --color-btn-secondary:        transparent;
+  --color-btn-secondary-text:   #ffffff;
+
+  /* --- Status --- */
+  --color-success:              #22c55e;
+  --color-error:                #ef4444;
+
+  /* --- Typography --- */
+  --font-inter:                 'Inter', sans-serif;
+  --font-size-hero:             clamp(2.5rem, 6vw, 5rem);
+  --font-size-h1:               clamp(2rem, 4vw, 3.5rem);
+  --font-size-h2:               clamp(1.5rem, 3vw, 2.5rem);
+  --font-size-h3:               clamp(1.25rem, 2vw, 1.75rem);
+  --font-size-body:             1rem;
+  --font-size-small:            0.875rem;
+  --font-size-xs:               0.75rem;
+
+  --font-weight-regular:        400;
+  --font-weight-medium:         500;
+  --font-weight-semibold:       600;
+  --font-weight-bold:           700;
+  --font-weight-extrabold:      800;
+
+  --letter-spacing-tight:       -0.02em;
+  --letter-spacing-normal:      0em;
+  --letter-spacing-wide:        0.05em;
+  --letter-spacing-wider:       0.1em;
+  --letter-spacing-caps:        0.15em;
+
+  /* --- Spacing --- */
+  --spacing-xs:                 0.25rem;
+  --spacing-sm:                 0.5rem;
+  --spacing-md:                 1rem;
+  --spacing-lg:                 1.5rem;
+  --spacing-xl:                 2rem;
+  --spacing-2xl:                3rem;
+  --spacing-3xl:                4rem;
+  --spacing-4xl:                6rem;
+  --spacing-5xl:                8rem;
+
+  /* --- Container --- */
+  --container-max-width:        1280px;
+  --container-padding:          1.5rem;
+
+  /* --- Border Radius --- */
+  --radius-sm:                  4px;
+  --radius-md:                  8px;
+  --radius-lg:                  12px;
+  --radius-xl:                  16px;
+  --radius-2xl:                 24px;
+  --radius-pill:                9999px;
+
+  /* --- Transitions --- */
+  --transition-fast:            150ms ease;
+  --transition-base:            250ms ease;
+  --transition-slow:            400ms ease;
+  --transition-spring:          400ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}

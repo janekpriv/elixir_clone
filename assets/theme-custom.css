@@ -1,0 +1,284 @@
+/*
+  assets/theme-custom.css
+  Elixir design system overrides on top of Dawn.
+  Load order: base.css → theme-custom.css
+*/
+
+/* ============================================================
+   1. DAWN COLOR SCHEME OVERRIDE — dark background, white text
+   Dawn uses RGB triplets: --color-background: R,G,B
+   Override scheme-1 (:root) to Elixir dark palette.
+   ============================================================ */
+
+:root,
+.color-scheme-1,
+.color-scheme-2 {
+  --color-background:             10, 10, 10;
+  --gradient-background:          #0a0a0a;
+  --color-foreground:             255, 255, 255;
+  --color-background-contrast:    22, 22, 22;
+  --color-shadow:                 0, 0, 0;
+  --color-button:                 0, 229, 255;
+  --color-button-text:            0, 0, 0;
+  --color-secondary-button:       10, 10, 10;
+  --color-secondary-button-text:  255, 255, 255;
+  --color-link:                   0, 229, 255;
+  --color-badge-foreground:       255, 255, 255;
+  --color-badge-background:       22, 22, 22;
+  --color-badge-border:           255, 255, 255;
+  --payment-terms-background-color: rgb(10, 10, 10);
+}
+
+/* ============================================================
+   2. GLOBAL BODY — dark background, white text, Inter font
+   ============================================================ */
+
+body {
+  background-color: var(--color-elixir-bg) !important;
+  color: var(--color-elixir-text);
+  font-family: var(--font-inter);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Ensure all color scheme containers inherit dark background */
+.color-scheme-1,
+.color-scheme-2,
+.color-scheme-3,
+.color-scheme-4,
+.color-scheme-5 {
+  background-color: var(--color-elixir-bg);
+}
+
+/* ============================================================
+   3. FLUID TYPOGRAPHY h1–h4
+   ============================================================ */
+
+h1, .h1 {
+  font-size: var(--font-size-h1);
+  font-weight: var(--font-weight-extrabold);
+  line-height: 1.1;
+  letter-spacing: var(--letter-spacing-tight);
+  font-family: var(--font-inter);
+}
+
+h2, .h2 {
+  font-size: var(--font-size-h2);
+  font-weight: var(--font-weight-bold);
+  line-height: 1.15;
+  letter-spacing: var(--letter-spacing-tight);
+  font-family: var(--font-inter);
+}
+
+h3, .h3 {
+  font-size: var(--font-size-h3);
+  font-weight: var(--font-weight-semibold);
+  line-height: 1.2;
+  font-family: var(--font-inter);
+}
+
+h4, .h4 {
+  font-size: 1.25rem;
+  font-weight: var(--font-weight-semibold);
+  line-height: 1.3;
+  font-family: var(--font-inter);
+}
+
+/* ============================================================
+   4. GLASSMORPHISM UTILITIES
+   ============================================================ */
+
+.glass-card {
+  background: var(--color-elixir-surface);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--color-elixir-border);
+  border-radius: var(--radius-lg);
+}
+
+.glass-card--accent {
+  border-color: var(--color-border-accent);
+  box-shadow: 0 0 20px var(--color-accent-glow);
+}
+
+/* ============================================================
+   5. BUTTON STYLES
+   ============================================================ */
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 2rem;
+  background-color: var(--color-accent);
+  color: var(--color-btn-primary-text);
+  font-family: var(--font-inter);
+  font-weight: var(--font-weight-semibold);
+  font-size: 1rem;
+  letter-spacing: var(--letter-spacing-wide);
+  border: none;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  text-decoration: none;
+  transition: background-color var(--transition-base),
+              box-shadow var(--transition-base),
+              transform var(--transition-fast);
+  white-space: nowrap;
+}
+
+.btn-primary:hover,
+.btn-primary:focus-visible {
+  background-color: var(--color-accent-hover);
+  box-shadow: 0 0 20px var(--color-accent-glow);
+  transform: translateY(-1px);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 2rem;
+  background-color: transparent;
+  color: var(--color-elixir-text);
+  font-family: var(--font-inter);
+  font-weight: var(--font-weight-semibold);
+  font-size: 1rem;
+  letter-spacing: var(--letter-spacing-wide);
+  border: 1px solid var(--color-elixir-border);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  text-decoration: none;
+  transition: border-color var(--transition-base),
+              box-shadow var(--transition-base),
+              transform var(--transition-fast);
+  white-space: nowrap;
+}
+
+.btn-secondary:hover,
+.btn-secondary:focus-visible {
+  border-color: var(--color-accent);
+  box-shadow: 0 0 16px var(--color-accent-glow);
+  transform: translateY(-1px);
+}
+
+.btn-secondary:active {
+  transform: translateY(0);
+}
+
+/* ============================================================
+   6. PRODUCT CARD STYLES — dark bg, border, hover lift + glow
+   ============================================================ */
+
+.card-wrapper .card,
+.product-card-wrapper .card {
+  background-color: var(--color-elixir-bg-card);
+  border: 1px solid var(--color-elixir-border);
+  border-radius: var(--radius-lg);
+  transition: transform var(--transition-base),
+              box-shadow var(--transition-base),
+              border-color var(--transition-base);
+  overflow: hidden;
+}
+
+.card-wrapper .card:hover,
+.product-card-wrapper .card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4),
+              0 0 20px var(--color-accent-glow);
+  border-color: var(--color-border-accent);
+}
+
+.card__heading a,
+.card__heading a:visited {
+  color: var(--color-elixir-text);
+  text-decoration: none;
+}
+
+.card__heading a:hover {
+  color: var(--color-accent);
+}
+
+.price__regular .price-item,
+.price__sale .price-item--sale {
+  color: var(--color-elixir-text);
+}
+
+.price__sale .price-item--regular {
+  color: var(--color-elixir-text-secondary);
+}
+
+/* ============================================================
+   7. SCROLL ANIMATION CLASSES
+   ============================================================ */
+
+.animate-on-scroll {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.animate-on-scroll.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Staggered grid children */
+.animate-on-scroll--stagger > * {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.animate-on-scroll--stagger.is-visible > *:nth-child(1) { opacity: 1; transform: translateY(0); transition-delay: 0ms; }
+.animate-on-scroll--stagger.is-visible > *:nth-child(2) { opacity: 1; transform: translateY(0); transition-delay: 100ms; }
+.animate-on-scroll--stagger.is-visible > *:nth-child(3) { opacity: 1; transform: translateY(0); transition-delay: 200ms; }
+.animate-on-scroll--stagger.is-visible > *:nth-child(4) { opacity: 1; transform: translateY(0); transition-delay: 300ms; }
+.animate-on-scroll--stagger.is-visible > *:nth-child(5) { opacity: 1; transform: translateY(0); transition-delay: 400ms; }
+.animate-on-scroll--stagger.is-visible > *:nth-child(6) { opacity: 1; transform: translateY(0); transition-delay: 500ms; }
+
+/* ============================================================
+   8. ELIXIR SECTION HEADING STYLES (reusable across sections)
+   ============================================================ */
+
+.elixir-section-eyebrow {
+  display: block;
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--letter-spacing-caps);
+  text-transform: uppercase;
+  color: var(--color-accent);
+  margin-bottom: var(--spacing-sm);
+}
+
+.elixir-section-heading {
+  color: var(--color-elixir-text);
+  margin-top: 0;
+  margin-bottom: var(--spacing-md);
+}
+
+.elixir-section-subheading {
+  color: var(--color-elixir-text-secondary);
+  font-size: 1.125rem;
+  line-height: 1.6;
+  max-width: 640px;
+}
+
+/* ============================================================
+   9. CONTAINER UTILITY
+   ============================================================ */
+
+.elixir-container {
+  max-width: var(--container-max-width);
+  margin-inline: auto;
+  padding-inline: var(--container-padding);
+}
+
+@media (max-width: 749px) {
+  .elixir-container {
+    padding-inline: 1rem;
+  }
+}
