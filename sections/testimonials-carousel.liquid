@@ -1,12 +1,15 @@
 {%- comment -%}
   sections/testimonials-carousel.liquid
-  Infinite-style carousel of testimonial cards with avatar, star rating,
-  optional badge, and quote. Vanilla-JS driven — no Swiper.
+  Multi-card sliding carousel. Desktop shows cards_per_view cards at once,
+  mobile shows 1 (+ peek of next). Driven by testimonials-carousel.js.
 {%- endcomment -%}
 
 {%- liquid
   assign testimonial_blocks = section.blocks | where: 'type', 'testimonial'
-  assign block_count = testimonial_blocks | size
+  assign block_count        = testimonial_blocks | size
+  assign n                  = section.settings.cards_per_view | times: 1
+  assign card_pct           = 100.0 | divided_by: n | round: 4
+  assign gap_px             = n | minus: 1 | times: 24 | divided_by: n
 -%}
 
 {%- style -%}
@@ -15,6 +18,14 @@
     padding-top:      {{ section.settings.padding_top }}px;
     padding-bottom:   {{ section.settings.padding_bottom }}px;
   }
+
+  /* Desktop card width: (100% / N) minus share of gaps */
+  @media screen and (min-width: 750px) {
+    .testimonials-{{ section.id }} .testimonials__card {
+      flex: 0 0 calc({{ card_pct }}% - {{ gap_px }}px);
+      max-width: calc({{ card_pct }}% - {{ gap_px }}px);
+    }
+  }
 {%- endstyle -%}
 
 <div
@@ -22,6 +33,7 @@
   data-testimonials
   data-autoplay="{{ section.settings.autoplay }}"
   data-autoplay-speed="{{ section.settings.autoplay_speed }}"
+  data-cards="{{ section.settings.cards_per_view }}"
 >
   <div class="page-width">
 
@@ -40,102 +52,84 @@
       </div>
     {%- endif -%}
 
-    <div class="testimonials__stage">
+    {%- comment -%}── Track ────────────────────────────────────────────────{%- endcomment -%}
+    <div class="testimonials__track-wrap" aria-live="polite">
+      <div class="testimonials__track" data-testimonials-track>
 
-      {%- comment -%}── Prev / Next buttons ──────────────────────────────{%- endcomment -%}
-      {%- if block_count > 1 -%}
+        {%- for block in testimonial_blocks -%}
+          <div
+            class="testimonials__card testimonials__card--{{ section.settings.card_style }}"
+            {{ block.shopify_attributes }}
+          >
+
+            {%- if section.settings.show_rating -%}
+              <div class="testimonials__stars" aria-label="{{ block.settings.rating }} out of 5 stars">
+                {%- for i in (1..5) -%}
+                  <svg
+                    class="testimonials__star{% if i <= block.settings.rating %} testimonials__star--filled{% endif %}"
+                    viewBox="0 0 20 20"
+                    aria-hidden="true"
+                  >
+                    <path d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.32L10 13.27l-4.77 2.44.91-5.32L2.27 6.62l5.34-.78L10 1z"/>
+                  </svg>
+                {%- endfor -%}
+              </div>
+            {%- endif -%}
+
+            {%- if block.settings.content != blank -%}
+              <blockquote class="testimonials__content">
+                {{ block.settings.content }}
+              </blockquote>
+            {%- endif -%}
+
+            <div class="testimonials__author">
+              {%- if block.settings.avatar != blank -%}
+                {%- assign avatar_alt = block.settings.name | escape -%}
+                {{
+                  block.settings.avatar
+                  | image_url: width: 96
+                  | image_tag:
+                    class: 'testimonials__avatar',
+                    loading: 'lazy',
+                    width: 48,
+                    height: 48,
+                    alt: avatar_alt
+                }}
+              {%- else -%}
+                <div class="testimonials__avatar testimonials__avatar--placeholder" aria-hidden="true">
+                  {{ block.settings.name | slice: 0 | upcase }}
+                </div>
+              {%- endif -%}
+
+              <div class="testimonials__author-info">
+                {%- if block.settings.name != blank -%}
+                  <p class="testimonials__name">{{ block.settings.name }}</p>
+                {%- endif -%}
+                {%- if block.settings.badge != blank -%}
+                  <span class="testimonials__badge">{{ block.settings.badge }}</span>
+                {%- endif -%}
+              </div>
+            </div>
+
+          </div>
+        {%- endfor -%}
+
+      </div>
+    </div>
+
+    {%- comment -%}── Controls: prev · dots · next ────────────────────────{%- endcomment -%}
+    {%- if block_count > 1 -%}
+      <div class="testimonials__controls">
         <button
           class="testimonials__nav testimonials__nav--prev"
-          aria-label="{{ 'accessibility.previous_slide' | t | default: 'Previous slide' }}"
+          aria-label="Previous slide"
           data-testimonials-prev
         >
           <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
             <path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </button>
-        <button
-          class="testimonials__nav testimonials__nav--next"
-          aria-label="{{ 'accessibility.next_slide' | t | default: 'Next slide' }}"
-          data-testimonials-next
-        >
-          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-            <path d="M9 18l6-6-6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </button>
-      {%- endif -%}
 
-      {%- comment -%}── Carousel track ───────────────────────────────────{%- endcomment -%}
-      <div class="testimonials__track-wrap" aria-live="polite">
-        <div class="testimonials__track" data-testimonials-track>
-
-          {%- for block in testimonial_blocks -%}
-            <div
-              class="testimonials__card testimonials__card--{{ section.settings.card_style }}{% if forloop.first %} is-active{% endif %}"
-              data-index="{{ forloop.index0 }}"
-              aria-hidden="{% unless forloop.first %}true{% else %}false{% endunless %}"
-              {{ block.shopify_attributes }}
-            >
-
-              {%- comment -%}── Stars ─────────────────────────────────────{%- endcomment -%}
-              {%- if section.settings.show_rating -%}
-                <div class="testimonials__stars" aria-label="{{ block.settings.rating }} out of 5 stars">
-                  {%- for i in (1..5) -%}
-                    <svg
-                      class="testimonials__star{% if i <= block.settings.rating %} testimonials__star--filled{% endif %}"
-                      viewBox="0 0 20 20"
-                      aria-hidden="true"
-                    >
-                      <path d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.32L10 13.27l-4.77 2.44.91-5.32L2.27 6.62l5.34-.78L10 1z"/>
-                    </svg>
-                  {%- endfor -%}
-                </div>
-              {%- endif -%}
-
-              {%- comment -%}── Quote ─────────────────────────────────────{%- endcomment -%}
-              {%- if block.settings.content != blank -%}
-                <blockquote class="testimonials__content">
-                  {{ block.settings.content }}
-                </blockquote>
-              {%- endif -%}
-
-              {%- comment -%}── Author row ────────────────────────────────{%- endcomment -%}
-              <div class="testimonials__author">
-                {%- if block.settings.avatar != blank -%}
-                  {%- assign avatar_alt = block.settings.name | escape -%}
-                  {{
-                    block.settings.avatar
-                    | image_url: width: 96
-                    | image_tag:
-                      class: 'testimonials__avatar',
-                      loading: 'lazy',
-                      width: 48,
-                      height: 48,
-                      alt: avatar_alt
-                  }}
-                {%- else -%}
-                  <div class="testimonials__avatar testimonials__avatar--placeholder" aria-hidden="true">
-                    {{ block.settings.name | slice: 0 | upcase }}
-                  </div>
-                {%- endif -%}
-
-                <div class="testimonials__author-info">
-                  {%- if block.settings.name != blank -%}
-                    <p class="testimonials__name">{{ block.settings.name }}</p>
-                  {%- endif -%}
-                  {%- if block.settings.badge != blank -%}
-                    <span class="testimonials__badge">{{ block.settings.badge }}</span>
-                  {%- endif -%}
-                </div>
-              </div>
-
-            </div>
-          {%- endfor -%}
-
-        </div>
-      </div>
-
-      {%- comment -%}── Dots ─────────────────────────────────────────────{%- endcomment -%}
-      {%- if block_count > 1 -%}
         <div class="testimonials__dots" role="tablist" aria-label="Testimonial slides">
           {%- for block in testimonial_blocks -%}
             <button
@@ -147,9 +141,19 @@
             ></button>
           {%- endfor -%}
         </div>
-      {%- endif -%}
 
-    </div><!-- /.testimonials__stage -->
+        <button
+          class="testimonials__nav testimonials__nav--next"
+          aria-label="Next slide"
+          data-testimonials-next
+        >
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M9 18l6-6-6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+      </div>
+    {%- endif -%}
+
   </div>
 </div>
 
@@ -173,6 +177,17 @@
     {
       "type": "header",
       "content": "Carousel"
+    },
+    {
+      "type": "select",
+      "id": "cards_per_view",
+      "label": "Cards visible (desktop)",
+      "options": [
+        { "value": "1", "label": "1 card" },
+        { "value": "2", "label": "2 cards" },
+        { "value": "3", "label": "3 cards" }
+      ],
+      "default": "3"
     },
     {
       "type": "checkbox",
@@ -205,7 +220,7 @@
         { "value": "solid",  "label": "Solid" },
         { "value": "border", "label": "Border only" }
       ],
-      "default": "glass"
+      "default": "solid"
     },
     {
       "type": "header",
@@ -310,6 +325,24 @@
             "badge": "Verified buyer",
             "rating": 4,
             "content": "Great value for money. The quality is outstanding and customer support was very helpful when I had a question."
+          }
+        },
+        {
+          "type": "testimonial",
+          "settings": {
+            "name": "Tom R.",
+            "badge": "Verified buyer",
+            "rating": 5,
+            "content": "I was skeptical at first, but after the first week I was already seeing results. Absolutely worth every penny."
+          }
+        },
+        {
+          "type": "testimonial",
+          "settings": {
+            "name": "Anna W.",
+            "badge": "Verified buyer",
+            "rating": 5,
+            "content": "The packaging alone made me feel special. Product quality exceeded my expectations — will be ordering again."
           }
         }
       ]
