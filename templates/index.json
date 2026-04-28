@@ -41,9 +41,10 @@
         "layout": "image",
         "content_alignment": "left",
         "min_height": 90,
+        "background_image": "shopify://shop_images/71d4138a92874004ca6a6d5e1269a795.jpg",
         "video_url": "",
         "overlay_color": "#000000",
-        "overlay_opacity": 45,
+        "overlay_opacity": 80,
         "eyebrow_text": "TRUSTED BY 20K+ CUSTOMERS",
         "heading": "The Premium Formula That Changes Everything",
         "subheading": "Experience the difference with our science-backed formula. Real results, guaranteed.",
@@ -54,58 +55,6 @@
         "trust_badge_text": "30-Day Money-Back Guarantee",
         "padding_top": 0,
         "padding_bottom": 0
-      }
-    },
-    "scrolling_ticker_MMcRFa": {
-      "type": "scrolling-ticker",
-      "blocks": {
-        "ticker_item_8FkqEm": {
-          "type": "ticker_item",
-          "settings": {
-            "text": "FREE SHIPPING OVER $50"
-          }
-        },
-        "ticker_item_JNWKgb": {
-          "type": "ticker_item",
-          "settings": {
-            "text": "30-DAY MONEY BACK GUARANTEE"
-          }
-        },
-        "ticker_item_y468GD": {
-          "type": "ticker_item",
-          "settings": {
-            "text": "TRUSTED BY 20,000+ CUSTOMERS"
-          }
-        },
-        "ticker_item_Vwqe7t": {
-          "type": "ticker_item",
-          "settings": {
-            "text": "SECURE CHECKOUT"
-          }
-        }
-      },
-      "block_order": [
-        "ticker_item_8FkqEm",
-        "ticker_item_JNWKgb",
-        "ticker_item_y468GD",
-        "ticker_item_Vwqe7t"
-      ],
-      "name": "Scrolling ticker",
-      "settings": {
-        "heading": "Store announcements",
-        "speed": 30,
-        "direction": "rtl",
-        "pause_on_hover": true,
-        "font_size": 14,
-        "font_weight": "600",
-        "letter_spacing": "0.05em",
-        "uppercase": true,
-        "separator": "•",
-        "background_color": "#111111",
-        "text_color": "#ffffff",
-        "accent_color": "#00e5ff",
-        "padding_top": 12,
-        "padding_bottom": 12
       }
     },
     "testimonials_carousel_6tP9Yd": {
@@ -177,11 +126,118 @@
         "padding_top": 60,
         "padding_bottom": 60
       }
+    },
+    "scrolling_ticker_MMcRFa": {
+      "type": "scrolling-ticker",
+      "blocks": {
+        "ticker_item_8FkqEm": {
+          "type": "ticker_item",
+          "settings": {
+            "text": "FREE SHIPPING OVER $50"
+          }
+        },
+        "ticker_item_JNWKgb": {
+          "type": "ticker_item",
+          "settings": {
+            "text": "30-DAY MONEY BACK GUARANTEE"
+          }
+        },
+        "ticker_item_y468GD": {
+          "type": "ticker_item",
+          "settings": {
+            "text": "TRUSTED BY 20,000+ CUSTOMERS"
+          }
+        },
+        "ticker_item_Vwqe7t": {
+          "type": "ticker_item",
+          "settings": {
+            "text": "SECURE CHECKOUT"
+          }
+        }
+      },
+      "block_order": [
+        "ticker_item_8FkqEm",
+        "ticker_item_JNWKgb",
+        "ticker_item_y468GD",
+        "ticker_item_Vwqe7t"
+      ],
+      "name": "Scrolling ticker",
+      "settings": {
+        "heading": "Store announcements",
+        "speed": 30,
+        "direction": "rtl",
+        "pause_on_hover": true,
+        "font_size": 14,
+        "font_weight": "600",
+        "letter_spacing": "0.05em",
+        "uppercase": true,
+        "separator": "•",
+        "background_color": "#111111",
+        "text_color": "#ffffff",
+        "accent_color": "#00e5ff",
+        "padding_top": 12,
+        "padding_bottom": 12
+      }
+    },
+    "statistics_btrF9d": {
+      "type": "statistics",
+      "blocks": {
+        "stat_apMHKT": {
+          "type": "stat",
+          "settings": {
+            "value": "20,000+",
+            "description": "Happy customers",
+            "value_color": "#00e5ff"
+          }
+        },
+        "stat_BWVMjK": {
+          "type": "stat",
+          "settings": {
+            "value": "4.9",
+            "description": "Average rating",
+            "value_color": "#00e5ff"
+          }
+        },
+        "stat_UKQctH": {
+          "type": "stat",
+          "settings": {
+            "value": "98%",
+            "description": "Satisfaction rate",
+            "value_color": "#00e5ff"
+          }
+        },
+        "stat_gczLzt": {
+          "type": "stat",
+          "settings": {
+            "value": "#1",
+            "description": "In its category",
+            "value_color": "#00e5ff"
+          }
+        }
+      },
+      "block_order": [
+        "stat_apMHKT",
+        "stat_BWVMjK",
+        "stat_UKQctH",
+        "stat_gczLzt"
+      ],
+      "name": "Statistics",
+      "settings": {
+        "heading": "",
+        "subheading": "",
+        "columns": "4",
+        "show_separator": true,
+        "animate_numbers": true,
+        "background_color": "#0a0a0a",
+        "padding_top": 60,
+        "padding_bottom": 60
+      }
     }
   },
   "order": [
     "hero_wzqDhQ",
     "testimonials_carousel_6tP9Yd",
-    "scrolling_ticker_MMcRFa"
+    "scrolling_ticker_MMcRFa",
+    "statistics_btrF9d"
   ]
 }
