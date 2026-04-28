@@ -206,12 +206,13 @@
                 {%- if block.type == 'trust_icon' -%}
                   <li class="hero__trust-item" {{ block.shopify_attributes }}>
                     {%- if block.settings.icon != blank -%}
+                      {%- assign trust_icon_alt = block.settings.text | escape -%}
                       {{
                         block.settings.icon
                         | image_url: width: 40
                         | image_tag:
                           loading: 'lazy',
-                          alt: block.settings.text | escape,
+                          alt: trust_icon_alt,
                           width: 20,
                           height: 20
                       }}
@@ -307,12 +308,13 @@
               {%- if block.type == 'trust_icon' -%}
                 <li class="hero__trust-item" {{ block.shopify_attributes }}>
                   {%- if block.settings.icon != blank -%}
+                    {%- assign trust_icon_alt = block.settings.text | escape -%}
                     {{
                       block.settings.icon
                       | image_url: width: 40
                       | image_tag:
                         loading: 'lazy',
-                        alt: block.settings.text | escape,
+                        alt: trust_icon_alt,
                         width: 20,
                         height: 20
                     }}
