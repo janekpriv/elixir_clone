@@ -79,6 +79,13 @@
             "show_gift_card_recipient": true
           }
         },
+        "sticky_atc_yL87AR": {
+          "type": "sticky_atc",
+          "settings": {
+            "show_title": true,
+            "show_price": true
+          }
+        },
         "description": {
           "type": "description",
           "settings": {}
@@ -137,6 +144,7 @@
         "variant_picker",
         "quantity_selector",
         "buy_buttons",
+        "sticky_atc_yL87AR",
         "description",
         "collapsible-row-0",
         "collapsible-row-1",
