@@ -1125,3 +1125,85 @@ a.elixir-rating-summary__count {
     font-size: 0.8rem;
   }
 }
+
+/* ============================================================
+   17. STATISTICS
+   ============================================================ */
+
+.statistics {
+  overflow: hidden;
+}
+
+.statistics__header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.statistics__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+@media screen and (min-width: 750px) {
+  .statistics__grid--2 { grid-template-columns: repeat(2, 1fr); }
+  .statistics__grid--3 { grid-template-columns: repeat(3, 1fr); }
+  .statistics__grid--4 { grid-template-columns: repeat(4, 1fr); }
+}
+
+/* Separators */
+.statistics__grid--sep .statistics__item {
+  position: relative;
+}
+
+@media screen and (min-width: 750px) {
+  .statistics__grid--sep .statistics__item:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 20%;
+    height: 60%;
+    width: 1px;
+    background: var(--color-elixir-border);
+  }
+}
+
+/* Items */
+.statistics__item {
+  text-align: center;
+  padding: 2rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+@media screen and (max-width: 749px) {
+  .statistics__item {
+    padding: 1.5rem 1rem;
+  }
+
+  /* Mobile: bottom border between rows */
+  .statistics__grid .statistics__item:nth-child(-n+2):nth-last-child(n+3),
+  .statistics__grid .statistics__item:nth-child(-n+2):nth-last-child(n+3) ~ .statistics__item:nth-child(-n+4) {
+    border-bottom: 1px solid var(--color-elixir-border);
+  }
+}
+
+.statistics__value {
+  font-size: clamp(2.5rem, 5vw, 3.75rem);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  display: block;
+}
+
+.statistics__desc {
+  font-size: 0.9rem;
+  color: var(--color-elixir-text-muted);
+  margin: 0;
+  font-weight: 500;
+}
