@@ -1,0 +1,319 @@
+{%- comment -%}
+  sections/testimonials-carousel.liquid
+  Infinite-style carousel of testimonial cards with avatar, star rating,
+  optional badge, and quote. Vanilla-JS driven — no Swiper.
+{%- endcomment -%}
+
+{%- liquid
+  assign testimonial_blocks = section.blocks | where: 'type', 'testimonial'
+  assign block_count = testimonial_blocks | size
+-%}
+
+{%- style -%}
+  .testimonials-{{ section.id }} {
+    background-color: {{ section.settings.background_color }};
+    padding-top:      {{ section.settings.padding_top }}px;
+    padding-bottom:   {{ section.settings.padding_bottom }}px;
+  }
+{%- endstyle -%}
+
+<div
+  class="testimonials testimonials-{{ section.id }}"
+  data-testimonials
+  data-autoplay="{{ section.settings.autoplay }}"
+  data-autoplay-speed="{{ section.settings.autoplay_speed }}"
+>
+  <div class="page-width">
+
+    {%- if section.settings.heading != blank or section.settings.subheading != blank -%}
+      <div class="testimonials__header animate-on-scroll">
+        {%- if section.settings.heading != blank -%}
+          <h2 class="testimonials__heading elixir-section-heading">
+            {{ section.settings.heading }}
+          </h2>
+        {%- endif -%}
+        {%- if section.settings.subheading != blank -%}
+          <p class="testimonials__subheading elixir-section-subheading">
+            {{ section.settings.subheading }}
+          </p>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    <div class="testimonials__stage">
+
+      {%- comment -%}── Prev / Next buttons ──────────────────────────────{%- endcomment -%}
+      {%- if block_count > 1 -%}
+        <button
+          class="testimonials__nav testimonials__nav--prev"
+          aria-label="{{ 'accessibility.previous_slide' | t | default: 'Previous slide' }}"
+          data-testimonials-prev
+        >
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        <button
+          class="testimonials__nav testimonials__nav--next"
+          aria-label="{{ 'accessibility.next_slide' | t | default: 'Next slide' }}"
+          data-testimonials-next
+        >
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M9 18l6-6-6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+      {%- endif -%}
+
+      {%- comment -%}── Carousel track ───────────────────────────────────{%- endcomment -%}
+      <div class="testimonials__track-wrap" aria-live="polite">
+        <div class="testimonials__track" data-testimonials-track>
+
+          {%- for block in testimonial_blocks -%}
+            <div
+              class="testimonials__card testimonials__card--{{ section.settings.card_style }}{% if forloop.first %} is-active{% endif %}"
+              data-index="{{ forloop.index0 }}"
+              aria-hidden="{% unless forloop.first %}true{% else %}false{% endunless %}"
+              {{ block.shopify_attributes }}
+            >
+
+              {%- comment -%}── Stars ─────────────────────────────────────{%- endcomment -%}
+              {%- if section.settings.show_rating -%}
+                <div class="testimonials__stars" aria-label="{{ block.settings.rating }} out of 5 stars">
+                  {%- for i in (1..5) -%}
+                    <svg
+                      class="testimonials__star{% if i <= block.settings.rating %} testimonials__star--filled{% endif %}"
+                      viewBox="0 0 20 20"
+                      aria-hidden="true"
+                    >
+                      <path d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.32L10 13.27l-4.77 2.44.91-5.32L2.27 6.62l5.34-.78L10 1z"/>
+                    </svg>
+                  {%- endfor -%}
+                </div>
+              {%- endif -%}
+
+              {%- comment -%}── Quote ─────────────────────────────────────{%- endcomment -%}
+              {%- if block.settings.content != blank -%}
+                <blockquote class="testimonials__content">
+                  {{ block.settings.content }}
+                </blockquote>
+              {%- endif -%}
+
+              {%- comment -%}── Author row ────────────────────────────────{%- endcomment -%}
+              <div class="testimonials__author">
+                {%- if block.settings.avatar != blank -%}
+                  {%- assign avatar_alt = block.settings.name | escape -%}
+                  {{
+                    block.settings.avatar
+                    | image_url: width: 96
+                    | image_tag:
+                      class: 'testimonials__avatar',
+                      loading: 'lazy',
+                      width: 48,
+                      height: 48,
+                      alt: avatar_alt
+                  }}
+                {%- else -%}
+                  <div class="testimonials__avatar testimonials__avatar--placeholder" aria-hidden="true">
+                    {{ block.settings.name | slice: 0 | upcase }}
+                  </div>
+                {%- endif -%}
+
+                <div class="testimonials__author-info">
+                  {%- if block.settings.name != blank -%}
+                    <p class="testimonials__name">{{ block.settings.name }}</p>
+                  {%- endif -%}
+                  {%- if block.settings.badge != blank -%}
+                    <span class="testimonials__badge">{{ block.settings.badge }}</span>
+                  {%- endif -%}
+                </div>
+              </div>
+
+            </div>
+          {%- endfor -%}
+
+        </div>
+      </div>
+
+      {%- comment -%}── Dots ─────────────────────────────────────────────{%- endcomment -%}
+      {%- if block_count > 1 -%}
+        <div class="testimonials__dots" role="tablist" aria-label="Testimonial slides">
+          {%- for block in testimonial_blocks -%}
+            <button
+              class="testimonials__dot{% if forloop.first %} is-active{% endif %}"
+              role="tab"
+              aria-selected="{% if forloop.first %}true{% else %}false{% endif %}"
+              aria-label="Go to slide {{ forloop.index }}"
+              data-testimonials-dot="{{ forloop.index0 }}"
+            ></button>
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+
+    </div><!-- /.testimonials__stage -->
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Testimonials carousel",
+  "tag": "section",
+  "class": "section-testimonials",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "What Our Customers Say"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading"
+    },
+    {
+      "type": "header",
+      "content": "Carousel"
+    },
+    {
+      "type": "checkbox",
+      "id": "autoplay",
+      "label": "Autoplay",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "autoplay_speed",
+      "label": "Autoplay speed",
+      "min": 2000,
+      "max": 8000,
+      "step": 500,
+      "unit": "ms",
+      "default": 5000
+    },
+    {
+      "type": "checkbox",
+      "id": "show_rating",
+      "label": "Show star rating",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "card_style",
+      "label": "Card style",
+      "options": [
+        { "value": "glass",  "label": "Glass" },
+        { "value": "solid",  "label": "Solid" },
+        { "value": "border", "label": "Border only" }
+      ],
+      "default": "glass"
+    },
+    {
+      "type": "header",
+      "content": "Colours"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background",
+      "default": "#0a0a0a"
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 60
+    }
+  ],
+  "blocks": [
+    {
+      "type": "testimonial",
+      "name": "Testimonial",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "avatar",
+          "label": "Avatar photo"
+        },
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Customer name",
+          "default": "Jane D."
+        },
+        {
+          "type": "text",
+          "id": "badge",
+          "label": "Badge (e.g. Verified buyer)"
+        },
+        {
+          "type": "range",
+          "id": "rating",
+          "label": "Star rating",
+          "min": 1,
+          "max": 5,
+          "step": 1,
+          "default": 5
+        },
+        {
+          "type": "textarea",
+          "id": "content",
+          "label": "Review text",
+          "default": "Absolutely love this product — exactly what I was looking for. Fast shipping and great quality!"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Testimonials carousel",
+      "blocks": [
+        {
+          "type": "testimonial",
+          "settings": {
+            "name": "Sarah M.",
+            "badge": "Verified buyer",
+            "rating": 5,
+            "content": "Absolutely incredible quality. I've tried many similar products but this one blew me away. Will definitely buy again!"
+          }
+        },
+        {
+          "type": "testimonial",
+          "settings": {
+            "name": "James K.",
+            "badge": "Verified buyer",
+            "rating": 5,
+            "content": "Fast shipping, beautiful packaging, and the product itself is exactly as described. Highly recommend to anyone on the fence."
+          }
+        },
+        {
+          "type": "testimonial",
+          "settings": {
+            "name": "Priya L.",
+            "badge": "Verified buyer",
+            "rating": 4,
+            "content": "Great value for money. The quality is outstanding and customer support was very helpful when I had a question."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
