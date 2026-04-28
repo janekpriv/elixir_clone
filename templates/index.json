@@ -1,210 +1,187 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
-    "image_banner": {
-      "type": "image-banner",
+    "hero_wzqDhQ": {
+      "type": "hero",
       "blocks": {
-        "heading": {
-          "type": "heading",
+        "trust_icon_Dq6yji": {
+          "type": "trust_icon",
           "settings": {
-            "heading": "Image banner",
-            "heading_size": "h0"
+            "text": "Free Shipping"
           }
         },
-        "text": {
-          "type": "text",
+        "trust_icon_4XfTDa": {
+          "type": "trust_icon",
           "settings": {
-            "text": "Give customers details about the banner image(s) or content on the template.",
-            "text_style": "body"
+            "text": "30-Day Guarantee"
           }
         },
-        "button": {
-          "type": "buttons",
+        "trust_icon_nLLw4M": {
+          "type": "trust_icon",
           "settings": {
-            "button_label_1": "Shop all",
-            "button_link_1": "shopify://collections/all",
-            "button_style_secondary_1": true,
-            "button_label_2": "",
-            "button_link_2": "",
-            "button_style_secondary_2": false
+            "text": "Secure Checkout"
           }
         }
       },
       "block_order": [
-        "heading",
-        "text",
-        "button"
+        "trust_icon_Dq6yji",
+        "trust_icon_4XfTDa",
+        "trust_icon_nLLw4M"
       ],
+      "name": "Hero",
       "settings": {
-        "image_overlay_opacity": 40,
-        "image_height": "large",
-        "desktop_content_position": "bottom-center",
-        "show_text_box": false,
-        "desktop_content_alignment": "center",
-        "color_scheme": "scheme-3",
-        "mobile_content_alignment": "center",
-        "stack_images_on_mobile": false,
-        "show_text_below": false
-      }
-    },
-    "rich_text": {
-      "type": "rich-text",
-      "blocks": {
-        "heading": {
-          "type": "heading",
-          "settings": {
-            "heading": "Talk about your brand",
-            "heading_size": "h1"
-          }
-        },
-        "text": {
-          "type": "text",
-          "settings": {
-            "text": "<p>Share information about your brand with your customers. Describe a product, make announcements, or welcome customers to your store.<\/p>"
-          }
-        }
-      },
-      "block_order": [
-        "heading",
-        "text"
-      ],
-      "settings": {
-        "color_scheme": "scheme-1",
-        "full_width": true,
-        "padding_top": 40,
+        "layout": "image",
+        "content_alignment": "left",
+        "min_height": 90,
+        "video_url": "",
+        "overlay_color": "#000000",
+        "overlay_opacity": 45,
+        "eyebrow_text": "TRUSTED BY 20K+ CUSTOMERS",
+        "heading": "The Premium Formula That Changes Everything",
+        "subheading": "Experience the difference with our science-backed formula. Real results, guaranteed.",
+        "cta_primary_text": "Shop Now",
+        "cta_primary_url": "shopify://products/stainless-steel-gua-sha-lymphatic-face-contour-brush-set",
+        "cta_secondary_text": "Learn More",
+        "cta_secondary_url": "",
+        "trust_badge_text": "30-Day Money-Back Guarantee",
+        "padding_top": 0,
         "padding_bottom": 0
       }
     },
-    "featured_collection": {
-      "type": "featured-collection",
-      "settings": {
-        "title": "Featured products",
-        "heading_size": "h2",
-        "collection": "all",
-        "products_to_show": 8,
-        "columns_desktop": 4,
-        "color_scheme": "scheme-1",
-        "show_view_all": false,
-        "swipe_on_mobile": false,
-        "image_ratio": "adapt",
-        "show_secondary_image": true,
-        "show_vendor": false,
-        "show_rating": false,
-        "columns_mobile": "2",
-        "padding_top": 28,
-        "padding_bottom": 36
-      }
-    },
-    "collage": {
-      "type": "collage",
+    "scrolling_ticker_MMcRFa": {
+      "type": "scrolling-ticker",
       "blocks": {
-        "collection-0": {
-          "type": "collection",
+        "ticker_item_8FkqEm": {
+          "type": "ticker_item",
           "settings": {
-            "collection": ""
+            "text": "FREE SHIPPING OVER $50"
           }
         },
-        "product": {
-          "type": "product",
+        "ticker_item_JNWKgb": {
+          "type": "ticker_item",
           "settings": {
-            "product": "",
-            "second_image": false
+            "text": "30-DAY MONEY BACK GUARANTEE"
           }
         },
-        "collection-1": {
-          "type": "collection",
+        "ticker_item_y468GD": {
+          "type": "ticker_item",
           "settings": {
-            "collection": ""
+            "text": "TRUSTED BY 20,000+ CUSTOMERS"
+          }
+        },
+        "ticker_item_Vwqe7t": {
+          "type": "ticker_item",
+          "settings": {
+            "text": "SECURE CHECKOUT"
           }
         }
       },
       "block_order": [
-        "collection-0",
-        "product",
-        "collection-1"
+        "ticker_item_8FkqEm",
+        "ticker_item_JNWKgb",
+        "ticker_item_y468GD",
+        "ticker_item_Vwqe7t"
       ],
+      "name": "Scrolling ticker",
       "settings": {
-        "heading": "Multimedia collage",
-        "heading_size": "h2",
-        "desktop_layout": "left",
-        "mobile_layout": "collage",
-        "color_scheme": "scheme-1",
-        "padding_top": 36,
-        "padding_bottom": 36
+        "heading": "Store announcements",
+        "speed": 30,
+        "direction": "rtl",
+        "pause_on_hover": true,
+        "font_size": 14,
+        "font_weight": "600",
+        "letter_spacing": "0.05em",
+        "uppercase": true,
+        "separator": "•",
+        "background_color": "#111111",
+        "text_color": "#ffffff",
+        "accent_color": "#00e5ff",
+        "padding_top": 12,
+        "padding_bottom": 12
       }
     },
-    "video": {
-      "type": "video",
-      "settings": {
-        "heading": "",
-        "video_url": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
-        "heading_size": "h1",
-        "description": "",
-        "full_width": false,
-        "color_scheme": "scheme-1",
-        "padding_top": 36,
-        "padding_bottom": 36
-      }
-    },
-    "multicolumn": {
-      "type": "multicolumn",
+    "testimonials_carousel_6tP9Yd": {
+      "type": "testimonials-carousel",
       "blocks": {
-        "column1": {
-          "type": "column",
+        "testimonial_VECRHR": {
+          "type": "testimonial",
           "settings": {
-            "title": "Column",
-            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.<\/p>",
-            "link_label": "",
-            "link": ""
+            "name": "Sarah M.",
+            "badge": "Verified buyer",
+            "rating": 5,
+            "content": "Absolutely incredible quality. I've tried many similar products but this one blew me away. Will definitely buy again!"
           }
         },
-        "column2": {
-          "type": "column",
+        "testimonial_Ag3hT8": {
+          "type": "testimonial",
           "settings": {
-            "title": "Column",
-            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.<\/p>",
-            "link_label": "",
-            "link": ""
+            "name": "James K.",
+            "badge": "Verified buyer",
+            "rating": 5,
+            "content": "Fast shipping, beautiful packaging, and the product itself is exactly as described. Highly recommend to anyone on the fence."
           }
         },
-        "column3": {
-          "type": "column",
+        "testimonial_A9LU9d": {
+          "type": "testimonial",
           "settings": {
-            "title": "Column",
-            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.<\/p>",
-            "link_label": "",
-            "link": ""
+            "name": "Priya L.",
+            "badge": "Verified buyer",
+            "rating": 4,
+            "content": "Great value for money. The quality is outstanding and customer support was very helpful when I had a question."
+          }
+        },
+        "testimonial_QB7H69": {
+          "type": "testimonial",
+          "settings": {
+            "name": "Tom R.",
+            "badge": "Verified buyer",
+            "rating": 5,
+            "content": "I was skeptical at first, but after the first week I was already seeing results. Absolutely worth every penny."
+          }
+        },
+        "testimonial_8wjqzz": {
+          "type": "testimonial",
+          "settings": {
+            "name": "Anna W.",
+            "badge": "Verified buyer",
+            "rating": 5,
+            "content": "The packaging alone made me feel special. Product quality exceeded my expectations — will be ordering again."
           }
         }
       },
       "block_order": [
-        "column1",
-        "column2",
-        "column3"
+        "testimonial_VECRHR",
+        "testimonial_Ag3hT8",
+        "testimonial_A9LU9d",
+        "testimonial_QB7H69",
+        "testimonial_8wjqzz"
       ],
+      "name": "Testimonials carousel",
       "settings": {
-        "title": "",
-        "heading_size": "h1",
-        "image_width": "third",
-        "image_ratio": "adapt",
-        "columns_desktop": 3,
-        "column_alignment": "center",
-        "background_style": "none",
-        "button_label": "",
-        "button_link": "",
-        "swipe_on_mobile": false,
-        "color_scheme": "scheme-1",
-        "columns_mobile": "1",
-        "padding_top": 36,
-        "padding_bottom": 36
+        "heading": "What Our Customers Say",
+        "subheading": "",
+        "cards_per_view": "3",
+        "autoplay": true,
+        "autoplay_speed": 5000,
+        "show_rating": true,
+        "card_style": "solid",
+        "background_color": "#0a0a0a",
+        "padding_top": 60,
+        "padding_bottom": 60
       }
     }
   },
   "order": [
-    "image_banner",
-    "rich_text",
-    "featured_collection",
-    "collage",
-    "video",
-    "multicolumn"
+    "hero_wzqDhQ",
+    "testimonials_carousel_6tP9Yd",
+    "scrolling_ticker_MMcRFa"
   ]
 }
