@@ -759,6 +759,7 @@
                 {%- assign rating_val = block.settings.rating -%}
                 {%- assign rating_floor = rating_val | floor -%}
                 {%- assign rating_decimal = rating_val | modulo: 1 -%}
+                {%- assign rating_next = rating_floor | plus: 1 -%}
                 <div class="elixir-rating-summary" {{ block.shopify_attributes }}>
                   <div class="elixir-rating-summary__stars" aria-label="Rating: {{ rating_val }} out of 5" role="img">
                     {%- for i in (1..5) -%}
@@ -766,7 +767,7 @@
                         <svg class="elixir-star elixir-star--full" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
                           <path d="M8 1.5l1.55 3.15 3.47.5-2.51 2.45.59 3.46L8 9.38 4.9 11.06l.59-3.46L3 5.15l3.47-.5L8 1.5z" fill="currentColor"/>
                         </svg>
-                      {%- elsif i == rating_floor | plus: 1 and rating_decimal >= 0.3 -%}
+                      {%- elsif i == rating_next and rating_decimal >= 0.3 -%}
                         <svg class="elixir-star elixir-star--half" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
                           <defs><clipPath id="half-{{ block.id }}-{{ i }}"><rect x="0" y="0" width="8" height="16"/></clipPath></defs>
                           <path d="M8 1.5l1.55 3.15 3.47.5-2.51 2.45.59 3.46L8 9.38 4.9 11.06l.59-3.46L3 5.15l3.47-.5L8 1.5z" fill="rgba(255,255,255,0.15)"/>
