@@ -1007,3 +1007,121 @@ a.elixir-rating-summary__count {
   background: var(--color-accent);
   transform: scale(1.3);
 }
+
+/* ============================================================
+   16. COMPARISON TABLE
+   ============================================================ */
+
+.comparison {
+  overflow: hidden;
+}
+
+.comparison__header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.comparison__scroll-wrap {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border-radius: var(--radius-card);
+  border: 1px solid var(--color-elixir-border);
+}
+
+.comparison__table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+/* Header row */
+.comparison__th {
+  padding: 1.1rem 1.5rem;
+  text-align: center;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--color-elixir-text-muted);
+  border-bottom: 1px solid var(--color-elixir-border);
+  white-space: nowrap;
+}
+
+.comparison__th--feature {
+  text-align: left;
+  width: 45%;
+}
+
+.comparison__th--our {
+  color: var(--color-accent);
+  background: var(--color-accent-glow);
+}
+
+/* Data cells */
+.comparison__td {
+  padding: 1rem 1.5rem;
+  text-align: center;
+  font-size: 0.95rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  vertical-align: middle;
+}
+
+.comparison__td--feature {
+  text-align: left;
+  color: var(--color-elixir-text);
+  font-weight: 500;
+}
+
+.comparison__td--competitor {
+  color: var(--color-elixir-text-muted);
+}
+
+.comparison__our-cell {
+  background: rgba(0, 229, 255, 0.03);
+}
+
+.comparison__row:last-child .comparison__td {
+  border-bottom: none;
+}
+
+/* Hover highlight */
+.comparison__row:hover .comparison__td {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.comparison__row:hover .comparison__our-cell {
+  background: rgba(0, 229, 255, 0.05);
+}
+
+/* Check / cross icons */
+.comparison__check {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.comparison__check svg {
+  width: 22px;
+  height: 22px;
+}
+
+.comparison__check--yes {
+  color: var(--color-accent);
+}
+
+.comparison__check--no {
+  color: var(--color-elixir-text-muted);
+}
+
+@media screen and (max-width: 749px) {
+  .comparison__th,
+  .comparison__td {
+    padding: 0.85rem 0.875rem;
+    font-size: 0.875rem;
+  }
+
+  .comparison__th--feature,
+  .comparison__td--feature {
+    font-size: 0.8rem;
+  }
+}
