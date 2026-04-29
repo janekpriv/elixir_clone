@@ -1584,3 +1584,272 @@ a.elixir-rating-summary__count {
 .iwt__cta {
   padding-top: 0.5rem;
 }
+
+/* ============================================================
+   21. CART DRAWER — glassmorphism override
+   ============================================================ */
+
+/* Panel */
+.drawer__inner {
+  background: rgba(6, 6, 6, 0.97) !important;
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+  border-left: 1px solid var(--color-elixir-border) !important;
+}
+
+/* Overlay */
+#CartDrawer-Overlay,
+.cart-drawer__overlay {
+  background: rgba(0, 0, 0, 0.7) !important;
+}
+
+/* Header */
+.drawer__header {
+  border-bottom: 1px solid var(--color-elixir-border);
+  padding: 20px 24px;
+}
+
+.drawer__heading {
+  font-weight: 700;
+  color: var(--color-elixir-text) !important;
+}
+
+/* Close button */
+.drawer__close {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: var(--radius-md);
+  color: var(--color-elixir-text);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  transition: background var(--transition-fast), border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.drawer__close:hover {
+  background: var(--color-accent-glow);
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+  box-shadow: 0 0 12px var(--color-accent-glow);
+}
+
+/* Cart items */
+.cart-items .cart-item {
+  border-bottom: 1px solid var(--color-elixir-border);
+  padding: 16px 0;
+}
+
+.cart-item__image {
+  border-radius: var(--radius-md);
+}
+
+.cart-item__name,
+.cart-item__name.h4 {
+  font-weight: 600 !important;
+  color: var(--color-elixir-text) !important;
+  text-decoration: none !important;
+}
+
+.cart-item__name:hover {
+  color: var(--color-accent) !important;
+}
+
+.cart-item .product-option,
+.cart-item .product-option dt,
+.cart-item .product-option dd {
+  color: var(--color-elixir-text-muted);
+  font-size: 0.75rem;
+}
+
+/* Quantity input */
+.cart-item .quantity {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--color-elixir-border) !important;
+  border-radius: var(--radius-md);
+  color: var(--color-elixir-text);
+}
+
+.cart-item .quantity__button {
+  color: var(--color-elixir-text);
+}
+
+.cart-item .quantity__input {
+  background: transparent;
+  color: var(--color-elixir-text);
+}
+
+/* Totals */
+.totals {
+  border-top: 1px solid var(--color-elixir-border);
+  padding-top: 12px;
+}
+
+.totals__total,
+.totals__total-value {
+  color: var(--color-elixir-text) !important;
+}
+
+/* Checkout button */
+#CartDrawer-Checkout,
+.cart__checkout-button {
+  width: 100%;
+  background-color: var(--color-accent) !important;
+  color: #000 !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.05em;
+  border: none !important;
+  border-radius: var(--radius-md) !important;
+  transition: box-shadow var(--transition-fast), transform var(--transition-fast) !important;
+}
+
+#CartDrawer-Checkout:hover:not(:disabled),
+.cart__checkout-button:hover:not(:disabled) {
+  box-shadow: 0 0 24px var(--color-accent-glow);
+  transform: translateY(-1px);
+}
+
+/* ── Progress Bar ── */
+.cart-progress-bar-wrapper {
+  padding: 14px 24px 12px;
+  border-bottom: 1px solid var(--color-elixir-border);
+}
+
+.cart-progress-bar__text {
+  font-size: 0.8rem;
+  color: var(--color-elixir-text-muted);
+  margin: 0 0 8px;
+  text-align: center;
+}
+
+.cart-progress-bar__text strong {
+  color: var(--color-accent);
+}
+
+.cart-progress-bar__track {
+  height: 4px;
+  background: var(--color-elixir-border);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.cart-progress-bar__fill {
+  height: 100%;
+  background: var(--color-accent);
+  border-radius: 999px;
+  transition: width 0.6s ease;
+}
+
+.cart-progress-bar__unlocked .cart-progress-bar__text {
+  color: var(--color-accent);
+  font-weight: 600;
+}
+
+/* ── Upsell Carousel ── */
+.cart-upsell {
+  padding: 16px 24px;
+  border-bottom: 1px solid var(--color-elixir-border);
+}
+
+.cart-upsell__heading {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-elixir-text-muted);
+  margin: 0 0 12px;
+}
+
+.cart-upsell__track {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+}
+
+.cart-upsell__track::-webkit-scrollbar { display: none; }
+
+.cart-upsell__card {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--color-elixir-border);
+  border-radius: var(--radius-card);
+  padding: 10px;
+  min-width: 200px;
+  max-width: 220px;
+  scroll-snap-align: start;
+  flex-shrink: 0;
+}
+
+.cart-upsell__img {
+  width: 52px;
+  height: 52px;
+  object-fit: cover;
+  border-radius: var(--radius-md);
+  flex-shrink: 0;
+}
+
+.cart-upsell__info { flex: 1; min-width: 0; }
+
+.cart-upsell__name {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--color-elixir-text);
+  margin: 0 0 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.cart-upsell__price {
+  font-size: 0.75rem;
+  color: var(--color-elixir-text-muted);
+  margin: 0 0 6px;
+}
+
+.cart-upsell__add {
+  font-size: 0.7rem;
+  font-weight: 600;
+  background: var(--color-accent-glow);
+  border: 1px solid var(--color-accent);
+  border-radius: var(--radius-md);
+  color: var(--color-accent);
+  padding: 4px 8px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background var(--transition-fast), color var(--transition-fast);
+}
+
+.cart-upsell__add:hover {
+  background: var(--color-accent);
+  color: #000;
+}
+
+/* ── Trust Icons ── */
+.cart-trust-icons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 14px 24px 0;
+  flex-wrap: wrap;
+}
+
+.cart-trust-icon {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: var(--color-elixir-text-muted);
+  font-size: 0.7rem;
+  font-weight: 500;
+}
+
+.cart-trust-icon svg {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+}
