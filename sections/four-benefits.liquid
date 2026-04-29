@@ -1,0 +1,287 @@
+{%- comment -%}
+  sections/four-benefits.liquid
+  Grid of benefit cards: icon + title + description.
+  Staggered animate-on-scroll per card via inline animation-delay.
+{%- endcomment -%}
+
+{%- liquid
+  assign benefit_blocks = section.blocks | where: 'type', 'benefit'
+  assign icon_half      = section.settings.icon_size | divided_by: 2
+  assign align_class    = 'benefits__card--center'
+  if section.settings.text_alignment == 'left'
+    assign align_class = 'benefits__card--left'
+  endif
+-%}
+
+{%- style -%}
+  .benefits-{{ section.id }} {
+    background-color: {{ section.settings.background_color }};
+    padding-top:      {{ section.settings.padding_top }}px;
+    padding-bottom:   {{ section.settings.padding_bottom }}px;
+  }
+
+  .benefits-{{ section.id }} .benefits__grid {
+    grid-template-columns: repeat({{ section.settings.columns_desktop }}, 1fr);
+  }
+
+  .benefits-{{ section.id }} .benefits__icon-wrap {
+    width:  {{ section.settings.icon_size }}px;
+    height: {{ section.settings.icon_size }}px;
+  }
+
+  .benefits-{{ section.id }} .benefits__icon-img,
+  .benefits-{{ section.id }} .benefits__icon-svg {
+    width:  {{ icon_half }}px;
+    height: {{ icon_half }}px;
+    color:  {{ section.settings.icon_color }};
+    fill:   {{ section.settings.icon_color }};
+  }
+
+  {%- if section.settings.show_icon_background -%}
+    .benefits-{{ section.id }} .benefits__icon-wrap {
+      background: rgba(0, 229, 255, 0.10);
+    }
+  {%- endif -%}
+{%- endstyle -%}
+
+<div class="benefits benefits-{{ section.id }}">
+  <div class="page-width">
+
+    {%- if section.settings.heading != blank or section.settings.subheading != blank -%}
+      <div class="benefits__header animate-on-scroll">
+        {%- if section.settings.heading != blank -%}
+          <h2 class="benefits__heading elixir-section-heading">
+            {{ section.settings.heading }}
+          </h2>
+        {%- endif -%}
+        {%- if section.settings.subheading != blank -%}
+          <p class="benefits__subheading elixir-section-subheading">
+            {{ section.settings.subheading }}
+          </p>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    <ul class="benefits__grid list-unstyled">
+
+      {%- for block in benefit_blocks -%}
+        {%- assign delay = forloop.index0 | times: 100 -%}
+        <li
+          class="benefits__card benefits__card--{{ section.settings.card_style }} {{ align_class }} animate-on-scroll"
+          style="transition-delay: {{ delay }}ms;"
+          {{ block.shopify_attributes }}
+        >
+
+          <div class="benefits__icon-wrap">
+            {%- if block.settings.icon != blank -%}
+              {%- assign benefit_icon_alt = block.settings.title | escape -%}
+              {{
+                block.settings.icon
+                | image_url: width: 128
+                | image_tag:
+                  class: 'benefits__icon-img',
+                  loading: 'lazy',
+                  alt: benefit_icon_alt
+              }}
+            {%- else -%}
+              <svg class="benefits__icon-svg" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M12 2L4 5v6c0 5.25 3.5 10.15 8 11.35C16.5 21.15 20 16.25 20 11V5L12 2Z"
+                  stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+                <path d="M9 12l2 2 4-4"
+                  stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            {%- endif -%}
+          </div>
+
+          {%- if block.settings.title != blank -%}
+            <h3 class="benefits__title">{{ block.settings.title }}</h3>
+          {%- endif -%}
+
+          {%- if block.settings.description != blank -%}
+            <p class="benefits__desc">{{ block.settings.description }}</p>
+          {%- endif -%}
+
+        </li>
+      {%- endfor -%}
+
+    </ul>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "4 Benefits",
+  "tag": "section",
+  "class": "section-benefits",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Why Choose Us"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "card_style",
+      "label": "Card style",
+      "options": [
+        { "value": "glass",    "label": "Glass" },
+        { "value": "bordered", "label": "Bordered" },
+        { "value": "minimal",  "label": "Minimal" }
+      ],
+      "default": "glass"
+    },
+    {
+      "type": "select",
+      "id": "columns_desktop",
+      "label": "Columns (desktop)",
+      "options": [
+        { "value": "2", "label": "2" },
+        { "value": "3", "label": "3" },
+        { "value": "4", "label": "4" }
+      ],
+      "default": "4"
+    },
+    {
+      "type": "select",
+      "id": "text_alignment",
+      "label": "Text alignment",
+      "options": [
+        { "value": "center", "label": "Center" },
+        { "value": "left",   "label": "Left" }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "header",
+      "content": "Icon"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_icon_background",
+      "label": "Show icon circle background",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "icon_size",
+      "label": "Icon circle size",
+      "min": 48,
+      "max": 96,
+      "step": 8,
+      "unit": "px",
+      "default": 64
+    },
+    {
+      "type": "color",
+      "id": "icon_color",
+      "label": "Icon colour",
+      "default": "#00e5ff"
+    },
+    {
+      "type": "header",
+      "content": "Colours"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background",
+      "default": "#0a0a0a"
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding top",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding bottom",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 80
+    }
+  ],
+  "blocks": [
+    {
+      "type": "benefit",
+      "name": "Benefit",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "icon",
+          "label": "Icon image",
+          "info": "Leave empty to use default icon"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Benefit Title"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description",
+          "default": "Short description of this benefit."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "4 Benefits",
+      "blocks": [
+        {
+          "type": "benefit",
+          "settings": {
+            "title": "Science-Backed",
+            "description": "Clinically studied compounds with proven efficacy at therapeutic doses."
+          }
+        },
+        {
+          "type": "benefit",
+          "settings": {
+            "title": "Fast Absorption",
+            "description": "Liposomal delivery technology for superior bioavailability."
+          }
+        },
+        {
+          "type": "benefit",
+          "settings": {
+            "title": "Pure Ingredients",
+            "description": "Zero fillers, zero artificial additives. Just what your body needs."
+          }
+        },
+        {
+          "type": "benefit",
+          "settings": {
+            "title": "Satisfaction Guaranteed",
+            "description": "30-day money back guarantee — no questions asked."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

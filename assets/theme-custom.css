@@ -1286,3 +1286,117 @@ a.elixir-rating-summary__count {
 .faq__answer-inner p:last-child {
   margin-bottom: 0;
 }
+
+/* ============================================================
+   19. FOUR BENEFITS
+   ============================================================ */
+
+.benefits {
+  overflow: hidden;
+}
+
+.benefits__header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+/* Grid: 2-col mobile, N-col desktop (overridden per-section) */
+.benefits__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+@media screen and (min-width: 750px) {
+  /* Per-section style overrides grid-template-columns */
+  .benefits__grid {
+    gap: 24px;
+  }
+}
+
+@media screen and (max-width: 479px) {
+  .benefits__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ── Card base ── */
+.benefits__card {
+  border-radius: var(--radius-card);
+  transition: transform 0.3s var(--ease-out), box-shadow 0.3s var(--ease-out);
+  display: flex;
+  flex-direction: column;
+}
+
+.benefits__card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), 0 0 24px var(--color-accent-glow);
+}
+
+/* Card styles */
+.benefits__card--glass {
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 28px 24px;
+}
+
+.benefits__card--bordered {
+  background: var(--color-elixir-card);
+  border: 1px solid var(--color-elixir-border);
+  border-radius: var(--radius-lg);
+  padding: 28px 24px;
+}
+
+.benefits__card--minimal {
+  background: transparent;
+  border: none;
+  padding: 16px 8px;
+}
+
+/* Text alignment */
+.benefits__card--center {
+  align-items: center;
+  text-align: center;
+}
+
+.benefits__card--left {
+  align-items: flex-start;
+  text-align: left;
+}
+
+/* ── Icon circle ── */
+.benefits__icon-wrap {
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+  flex-shrink: 0;
+  /* size and background set per-section via {% style %} */
+}
+
+.benefits__icon-img,
+.benefits__icon-svg {
+  display: block;
+  /* width/height set per-section */
+}
+
+/* ── Text ── */
+.benefits__title {
+  font-weight: 700;
+  color: var(--color-elixir-text);
+  margin: 0 0 0.5rem;
+  font-size: 1.05rem;
+}
+
+.benefits__desc {
+  color: var(--color-elixir-text-muted);
+  font-size: 0.875rem;
+  line-height: 1.6;
+  margin: 0;
+}
