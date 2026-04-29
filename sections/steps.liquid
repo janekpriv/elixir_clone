@@ -1,0 +1,263 @@
+{%- comment -%}
+  sections/steps.liquid
+  Numbered steps: Horizontal / Vertical / Cards layout.
+  Connector lines via CSS pseudo-elements.
+  Staggered animate-on-scroll per step.
+{%- endcomment -%}
+
+{%- liquid
+  assign step_blocks  = section.blocks | where: 'type', 'step'
+  assign step_count   = step_blocks | size
+  assign icon_half    = section.settings.icon_size | divided_by: 2
+-%}
+
+{%- style -%}
+  .steps-{{ section.id }} {
+    background-color: {{ section.settings.background_color }};
+    padding-top:      {{ section.settings.padding_top }}px;
+    padding-bottom:   {{ section.settings.padding_bottom }}px;
+  }
+
+  .steps-{{ section.id }} .steps__number {
+    width:  {{ section.settings.icon_size }}px;
+    height: {{ section.settings.icon_size }}px;
+    color:  {{ section.settings.accent_color }};
+    border-color: {{ section.settings.accent_color }};
+    font-size: {{ icon_half }}px;
+  }
+
+  .steps-{{ section.id }} .steps__icon-img {
+    width:  {{ section.settings.icon_size }}px;
+    height: {{ section.settings.icon_size }}px;
+  }
+{%- endstyle -%}
+
+<div class="steps steps-{{ section.id }} steps--{{ section.settings.layout }}">
+  <div class="page-width">
+
+    {%- if section.settings.heading != blank or section.settings.subheading != blank -%}
+      <div class="steps__header animate-on-scroll">
+        {%- if section.settings.heading != blank -%}
+          <h2 class="steps__heading elixir-section-heading">
+            {{ section.settings.heading }}
+          </h2>
+        {%- endif -%}
+        {%- if section.settings.subheading != blank -%}
+          <p class="steps__subheading elixir-section-subheading">
+            {{ section.settings.subheading }}
+          </p>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    <ol class="steps__list list-unstyled steps__list--{{ section.settings.layout }}">
+
+      {%- for block in step_blocks -%}
+        {%- assign delay = forloop.index0 | times: 120 -%}
+        {%- assign is_last = false -%}
+        {%- if forloop.last -%}{%- assign is_last = true -%}{%- endif -%}
+
+        <li
+          class="steps__item steps__item--{{ section.settings.layout }}{% if is_last %} steps__item--last{% endif %} animate-on-scroll"
+          style="transition-delay: {{ delay }}ms;"
+          {{ block.shopify_attributes }}
+        >
+
+          {%- comment -%}── Number or icon ─────────────────────────────{%- endcomment -%}
+          <div class="steps__icon-col">
+
+            {%- if block.settings.icon != blank -%}
+              {%- assign step_icon_alt = block.settings.title | escape -%}
+              {{
+                block.settings.icon
+                | image_url: width: 160
+                | image_tag:
+                  class: 'steps__icon-img',
+                  loading: 'lazy',
+                  alt: step_icon_alt
+              }}
+            {%- elsif section.settings.show_numbers -%}
+              <div class="steps__number" aria-hidden="true">
+                {{ forloop.index }}
+              </div>
+            {%- endif -%}
+
+            {%- comment -%}── Connector line (vertical layout) ─────────{%- endcomment -%}
+            {%- if section.settings.show_connector and is_last == false and section.settings.layout == 'vertical' -%}
+              <div class="steps__connector steps__connector--vertical" aria-hidden="true"></div>
+            {%- endif -%}
+
+          </div>
+
+          {%- comment -%}── Content ───────────────────────────────────{%- endcomment -%}
+          <div class="steps__content">
+            {%- if block.settings.title != blank -%}
+              <h3 class="steps__title">{{ block.settings.title }}</h3>
+            {%- endif -%}
+            {%- if block.settings.description != blank -%}
+              <p class="steps__desc">{{ block.settings.description }}</p>
+            {%- endif -%}
+          </div>
+
+        </li>
+      {%- endfor -%}
+
+    </ol>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Steps / How it works",
+  "tag": "section",
+  "class": "section-steps",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "How It Works"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "Layout",
+      "options": [
+        { "value": "horizontal", "label": "Horizontal" },
+        { "value": "vertical",   "label": "Vertical" },
+        { "value": "cards",      "label": "Cards" }
+      ],
+      "default": "horizontal"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_numbers",
+      "label": "Show step numbers",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_connector",
+      "label": "Show connector lines",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Icon"
+    },
+    {
+      "type": "range",
+      "id": "icon_size",
+      "label": "Number / icon size",
+      "min": 40,
+      "max": 80,
+      "step": 8,
+      "unit": "px",
+      "default": 48
+    },
+    {
+      "type": "header",
+      "content": "Colours"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent colour",
+      "default": "#00e5ff"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background",
+      "default": "#0a0a0a"
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding top",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding bottom",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 80
+    }
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Step",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "icon",
+          "label": "Icon image",
+          "info": "Leave empty to show step number"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Step Title"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description",
+          "default": "Description of this step."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Steps / How it works",
+      "blocks": [
+        {
+          "type": "step",
+          "settings": {
+            "title": "Choose Your Product",
+            "description": "Browse our selection and pick what fits you best."
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "title": "Place Your Order",
+            "description": "Secure checkout in under 2 minutes."
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "title": "Feel The Difference",
+            "description": "Results you can feel within the first week."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

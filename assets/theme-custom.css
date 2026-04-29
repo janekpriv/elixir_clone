@@ -1946,3 +1946,235 @@ a.elixir-rating-summary__count {
   width: 16px;
   height: 16px;
 }
+
+/* ============================================================
+   23. STEPS / HOW IT WORKS
+   ============================================================ */
+
+.steps {
+  overflow: hidden;
+}
+
+.steps__header {
+  text-align: center;
+  margin-bottom: 3.5rem;
+}
+
+/* ── Shared number circle ── */
+.steps__number {
+  border-radius: 50%;
+  background: rgba(0, 229, 255, 0.08);
+  border: 2px solid;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  line-height: 1;
+  position: relative;
+  z-index: 1;
+  flex-shrink: 0;
+  /* width/height/color/border-color set per-section */
+}
+
+.steps__icon-img {
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.steps__title {
+  font-weight: 700;
+  color: var(--color-elixir-text);
+  margin: 0 0 0.5rem;
+  font-size: 1.05rem;
+}
+
+.steps__desc {
+  color: var(--color-elixir-text-muted);
+  font-size: 0.875rem;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   HORIZONTAL layout
+   ══════════════════════════════════════════════════════════════ */
+
+.steps__list--horizontal {
+  display: flex;
+  align-items: flex-start;
+  gap: 0;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.steps__item--horizontal {
+  flex: 1;
+  text-align: center;
+  position: relative;
+  padding: 0 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Horizontal connector: line from center of number to center of next number */
+.steps__item--horizontal:not(.steps__item--last) .steps__icon-col::after {
+  content: '';
+  position: absolute;
+  top: calc(var(--icon-half, 24px) - 1px);
+  left: calc(50% + var(--icon-half, 24px));
+  right: calc(-50% + var(--icon-half, 24px));
+  border-top: 2px dashed var(--color-elixir-border);
+}
+
+.steps__item--horizontal .steps__icon-col {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1.25rem;
+}
+
+.steps__item--horizontal .steps__content {
+  padding-inline: 8px;
+}
+
+/* On mobile: horizontal → vertical stacked */
+@media screen and (max-width: 749px) {
+  .steps__list--horizontal {
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .steps__item--horizontal {
+    flex-direction: row;
+    text-align: left;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 0 0 2rem;
+  }
+
+  .steps__item--horizontal .steps__icon-col {
+    flex-direction: column;
+    align-items: center;
+    width: auto;
+    margin-bottom: 0;
+  }
+
+  /* Mobile connector: vertical line below number */
+  .steps__item--horizontal:not(.steps__item--last) .steps__icon-col::after {
+    position: absolute;
+    top: auto;
+    bottom: -2rem;
+    left: 50%;
+    right: auto;
+    width: 0;
+    border-top: none;
+    border-left: 2px dashed var(--color-elixir-border);
+    height: 2rem;
+    transform: translateX(-50%);
+  }
+
+  .steps__item--horizontal .steps__content {
+    padding-top: 4px;
+    flex: 1;
+  }
+}
+
+/* ══════════════════════════════════════════════════════════════
+   VERTICAL layout
+   ══════════════════════════════════════════════════════════════ */
+
+.steps__list--vertical {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  max-width: 640px;
+  margin-inline: auto;
+  padding: 0;
+  list-style: none;
+}
+
+.steps__item--vertical {
+  display: flex;
+  gap: 1.5rem;
+  align-items: flex-start;
+  padding-bottom: 2.5rem;
+}
+
+.steps__item--vertical .steps__icon-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+/* Vertical connector line below the number circle */
+.steps__connector--vertical {
+  width: 2px;
+  flex: 1;
+  min-height: 40px;
+  background: repeating-linear-gradient(
+    to bottom,
+    var(--color-elixir-border) 0,
+    var(--color-elixir-border) 6px,
+    transparent 6px,
+    transparent 12px
+  );
+  margin-top: 8px;
+  align-self: stretch;
+}
+
+.steps__item--vertical .steps__content {
+  padding-top: 4px;
+  padding-bottom: 1rem;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   CARDS layout
+   ══════════════════════════════════════════════════════════════ */
+
+.steps__list--cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+@media screen and (max-width: 749px) {
+  .steps__list--cards {
+    grid-template-columns: 1fr;
+  }
+}
+
+.steps__item--cards {
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-card);
+  padding: 2rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1rem;
+  transition: transform 0.3s var(--ease-out), box-shadow 0.3s var(--ease-out);
+}
+
+.steps__item--cards:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), 0 0 20px var(--color-accent-glow);
+}
+
+.steps__item--cards .steps__icon-col {
+  display: flex;
+}
+
+.steps__item--cards .steps__content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
