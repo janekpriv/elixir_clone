@@ -1400,3 +1400,187 @@ a.elixir-rating-summary__count {
   line-height: 1.6;
   margin: 0;
 }
+
+/* ============================================================
+   20. IMAGE WITH TEXT
+   ============================================================ */
+
+.iwt {
+  overflow: hidden;
+}
+
+/* Full-width variant: grid stretches edge-to-edge */
+.iwt--full .iwt__grid {
+  max-width: 100%;
+  padding: 0;
+}
+
+/* ── Grid ── */
+.iwt__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+  align-items: center;
+}
+
+@media screen and (min-width: 750px) {
+  .iwt__grid {
+    gap: 48px;
+    /* grid-template-columns overridden per-section via {% style %} */
+  }
+}
+
+@media screen and (min-width: 750px) and (max-width: 989px) {
+  .iwt__grid {
+    gap: 32px;
+  }
+}
+
+/* ── Image column ── */
+.iwt__image-col {
+  width: 100%;
+}
+
+.iwt__image {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  /* border-radius set per-section via {% style %} */
+}
+
+@media screen and (max-width: 749px) {
+  .iwt__image {
+    height: 300px;
+    object-fit: cover;
+    border-radius: 0;
+  }
+}
+
+.iwt__image--placeholder {
+  background: var(--color-elixir-card);
+  border: 1px dashed var(--color-elixir-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 300px;
+}
+
+.iwt__image--placeholder svg {
+  width: 100%;
+  height: auto;
+  max-height: 400px;
+}
+
+/* ── Text column ── */
+.iwt__text-col {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1rem;
+  padding-block: 2rem;
+}
+
+@media screen and (min-width: 750px) {
+  .iwt__text-col {
+    padding-block: 0;
+  }
+}
+
+/* Eyebrow */
+.iwt__eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--color-accent);
+  margin: 0;
+}
+
+/* Heading */
+.iwt__heading {
+  font-size: clamp(1.75rem, 3vw, 2.5rem);
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: var(--color-elixir-text);
+  margin: 0;
+}
+
+/* Body */
+.iwt__body {
+  color: var(--color-elixir-text-muted);
+  line-height: 1.7;
+  font-size: 0.95rem;
+}
+
+.iwt__body p {
+  margin: 0 0 0.75rem;
+}
+
+.iwt__body p:last-child {
+  margin-bottom: 0;
+}
+
+/* ── Bullet list ── */
+.iwt__bullets {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.iwt__bullet {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  font-size: 0.95rem;
+  color: var(--color-elixir-text-muted);
+  line-height: 1.5;
+}
+
+.iwt__bullet-icon {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.iwt__bullet-icon--default {
+  color: var(--color-accent);
+}
+
+/* ── Badges ── */
+.iwt__badges {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem;
+}
+
+.iwt__badge {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.iwt__badge-img {
+  height: 28px;
+  width: auto;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+  opacity: 0.6;
+}
+
+.iwt__badge-text {
+  font-size: 0.8rem;
+  color: var(--color-elixir-text-muted);
+  font-weight: 500;
+}
+
+/* ── CTA ── */
+.iwt__cta {
+  padding-top: 0.5rem;
+}
