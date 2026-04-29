@@ -1853,3 +1853,96 @@ a.elixir-rating-summary__count {
   height: 14px;
   flex-shrink: 0;
 }
+
+/* ============================================================
+   22. ANNOUNCEMENT BAR
+   ============================================================ */
+
+.elixir-bar {
+  position: relative;
+  width: 100%;
+  z-index: 10;
+}
+
+/* Static mode */
+.elixir-bar__static {
+  text-align: center;
+  padding-inline: 3rem; /* room for close button */
+}
+
+.elixir-bar__text {
+  font-size: 0.8125rem;
+  font-weight: 500;
+  margin: 0;
+  display: inline;
+  line-height: 1.4;
+}
+
+.elixir-bar__link {
+  font-weight: 700;
+  text-decoration: underline;
+  margin-left: 10px;
+  transition: opacity 0.2s;
+}
+
+.elixir-bar__link:hover {
+  opacity: 0.75;
+}
+
+/* Marquee mode — same technique as scrolling-ticker */
+.elixir-bar__marquee {
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.elixir-bar__marquee-track {
+  display: inline-flex;
+  animation: bar-marquee linear infinite;
+  /* duration set per-section via {% style %} */
+  animation-duration: 20s;
+}
+
+.elixir-bar__marquee-set {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding-right: 40px;
+}
+
+@keyframes bar-marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .elixir-bar__marquee-track {
+    animation: none;
+  }
+}
+
+/* Close button */
+.elixir-bar__close {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.6;
+  transition: opacity 0.2s;
+  color: inherit;
+}
+
+.elixir-bar__close:hover {
+  opacity: 1;
+}
+
+.elixir-bar__close svg {
+  width: 16px;
+  height: 16px;
+}

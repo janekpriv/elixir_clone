@@ -1,0 +1,197 @@
+{%- comment -%}
+  sections/elixir-announcement-bar.liquid
+  Fullwidth announcement bar above the header.
+  Modes: static (centered text) or marquee (CSS scrolling, same technique
+  as scrolling-ticker.liquid). Close button persists via sessionStorage.
+{%- endcomment -%}
+
+{%- liquid
+  assign anim_direction = 'normal'
+  if section.settings.mode == 'marquee'
+    assign anim_direction = 'normal'
+  endif
+-%}
+
+{%- style -%}
+  .elixir-bar-{{ section.id }} {
+    background-color: {{ section.settings.background_color }};
+    color:            {{ section.settings.text_color }};
+    padding-top:      {{ section.settings.padding_top }}px;
+    padding-bottom:   {{ section.settings.padding_bottom }}px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .elixir-bar-{{ section.id }} .elixir-bar__text,
+  .elixir-bar-{{ section.id }} .elixir-bar__link {
+    color: {{ section.settings.text_color }};
+  }
+
+  {%- if section.settings.mode == 'marquee' -%}
+    .elixir-bar-{{ section.id }} .elixir-bar__marquee-track {
+      animation-duration: {{ section.settings.marquee_speed }}s;
+    }
+  {%- endif -%}
+{%- endstyle -%}
+
+<div
+  class="elixir-bar elixir-bar-{{ section.id }}"
+  data-announcement-bar
+  id="elixir-bar-{{ section.id }}"
+>
+
+  {%- if section.settings.mode == 'marquee' -%}
+    {%- comment -%}── Marquee mode ─────────────────────────────────────{%- endcomment -%}
+    <div class="elixir-bar__marquee">
+      <div class="elixir-bar__marquee-track">
+        {%- comment -%} Set 1 {%- endcomment -%}
+        <span class="elixir-bar__marquee-set">
+          <span class="elixir-bar__text">{{ section.settings.text }}</span>
+          {%- if section.settings.cta_text != blank -%}
+            <a href="{{ section.settings.cta_url | default: '#' }}" class="elixir-bar__link">
+              {{ section.settings.cta_text }}
+            </a>
+          {%- endif -%}
+          <span class="elixir-bar__sep" aria-hidden="true">&nbsp;·&nbsp;</span>
+        </span>
+        {%- comment -%} Set 2 (duplicate for seamless loop) {%- endcomment -%}
+        <span class="elixir-bar__marquee-set" aria-hidden="true">
+          <span class="elixir-bar__text">{{ section.settings.text }}</span>
+          {%- if section.settings.cta_text != blank -%}
+            <a href="{{ section.settings.cta_url | default: '#' }}" class="elixir-bar__link" tabindex="-1">
+              {{ section.settings.cta_text }}
+            </a>
+          {%- endif -%}
+          <span class="elixir-bar__sep" aria-hidden="true">&nbsp;·&nbsp;</span>
+        </span>
+      </div>
+    </div>
+
+  {%- else -%}
+    {%- comment -%}── Static mode ──────────────────────────────────────{%- endcomment -%}
+    <div class="elixir-bar__static">
+      <p class="elixir-bar__text">
+        {{ section.settings.text }}
+        {%- if section.settings.cta_text != blank -%}
+          <a href="{{ section.settings.cta_url | default: '#' }}" class="elixir-bar__link">
+            {{ section.settings.cta_text }}
+          </a>
+        {%- endif -%}
+      </p>
+    </div>
+  {%- endif -%}
+
+  {%- if section.settings.show_close_button -%}
+    <button
+      class="elixir-bar__close"
+      aria-label="Close announcement"
+      data-announcement-close="{{ section.id }}"
+    >
+      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+    </button>
+  {%- endif -%}
+
+</div>
+
+{% schema %}
+{
+  "name": "Announcement bar",
+  "tag": "section",
+  "class": "section-elixir-bar",
+  "settings": [
+    {
+      "type": "text",
+      "id": "text",
+      "label": "Announcement text",
+      "default": "🎉 Free shipping on orders over $50 — Limited time!"
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "CTA link text"
+    },
+    {
+      "type": "url",
+      "id": "cta_url",
+      "label": "CTA link URL"
+    },
+    {
+      "type": "header",
+      "content": "Display"
+    },
+    {
+      "type": "select",
+      "id": "mode",
+      "label": "Mode",
+      "options": [
+        { "value": "static",  "label": "Static" },
+        { "value": "marquee", "label": "Marquee (scrolling)" }
+      ],
+      "default": "static"
+    },
+    {
+      "type": "range",
+      "id": "marquee_speed",
+      "label": "Marquee speed",
+      "min": 10,
+      "max": 60,
+      "step": 5,
+      "unit": "s",
+      "default": 20
+    },
+    {
+      "type": "checkbox",
+      "id": "show_close_button",
+      "label": "Show close button",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Colours"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background",
+      "default": "#00e5ff"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text",
+      "default": "#000000"
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding top",
+      "min": 4,
+      "max": 20,
+      "step": 2,
+      "unit": "px",
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding bottom",
+      "min": 4,
+      "max": 20,
+      "step": 2,
+      "unit": "px",
+      "default": 10
+    }
+  ],
+  "presets": [
+    {
+      "name": "Announcement bar"
+    }
+  ]
+}
+{% endschema %}
