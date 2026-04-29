@@ -259,6 +259,36 @@
       }
     {% endstyle %}
 
+    {%- liquid
+      case settings.heading_letter_spacing
+        when 'tight'
+          assign heading_ls = '-0.02em'
+        when 'wide'
+          assign heading_ls = '0.05em'
+        else
+          assign heading_ls = '0em'
+      endcase
+      assign eyebrow_ls = settings.eyebrow_letter_spacing | times: 0.01
+    -%}
+    <style>
+      :root {
+        --font-size-hero:          {{ settings.heading_size_hero }}px;
+        --font-size-h1:            {{ settings.heading_size_h1 }}px;
+        --font-size-h2:            {{ settings.heading_size_h2 }}px;
+        --font-size-h3:            {{ settings.heading_size_h3 }}px;
+        --font-weight-heading:     {{ settings.heading_weight }};
+        --letter-spacing-heading:  {{ heading_ls }};
+        --text-transform-heading:  {{ settings.heading_text_transform }};
+        --font-size-body:          {{ settings.body_size }}px;
+        --font-weight-body:        {{ settings.body_weight }};
+        --line-height-body:        {{ settings.body_line_height }};
+        --font-size-eyebrow:       {{ settings.eyebrow_size }}px;
+        --font-weight-eyebrow:     {{ settings.eyebrow_weight }};
+        --letter-spacing-eyebrow:  {{ eyebrow_ls }}em;
+        --text-transform-eyebrow:  {{ settings.eyebrow_text_transform }};
+      }
+    </style>
+
     {{ 'base.css' | asset_url | stylesheet_tag }}
     {{ 'theme-custom.css' | asset_url | stylesheet_tag }}
     <link rel="stylesheet" href="{{ 'component-cart-items.css' | asset_url }}" media="print" onload="this.media='all'">

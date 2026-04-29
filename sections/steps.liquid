@@ -30,6 +30,21 @@
     width:  {{ section.settings.icon_size }}px;
     height: {{ section.settings.icon_size }}px;
   }
+
+  .steps-{{ section.id }} .steps__heading {
+    font-size: {{ section.settings.heading_size }}px;
+    font-weight: {{ section.settings.heading_weight }};
+  }
+
+  .steps-{{ section.id }} .steps__title {
+    font-size: {{ section.settings.step_title_size }}px;
+    font-weight: {{ section.settings.step_title_weight }};
+  }
+
+  .steps-{{ section.id }} .steps__desc {
+    font-size: {{ section.settings.body_size }}px;
+    font-weight: {{ section.settings.body_weight }};
+  }
 {%- endstyle -%}
 
 <div class="steps steps-{{ section.id }} steps--{{ section.settings.layout }}">
@@ -179,6 +194,74 @@
       "id": "background_color",
       "label": "Background",
       "default": "#0a0a0a"
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "label": "Section heading size",
+      "min": 24,
+      "max": 56,
+      "step": 2,
+      "unit": "px",
+      "default": 36
+    },
+    {
+      "type": "select",
+      "id": "heading_weight",
+      "label": "Section heading weight",
+      "options": [
+        { "value": "400", "label": "Regular" },
+        { "value": "600", "label": "Semi-bold" },
+        { "value": "700", "label": "Bold" },
+        { "value": "800", "label": "Extra-bold" }
+      ],
+      "default": "700"
+    },
+    {
+      "type": "range",
+      "id": "step_title_size",
+      "label": "Step title size",
+      "min": 14,
+      "max": 28,
+      "step": 1,
+      "unit": "px",
+      "default": 18
+    },
+    {
+      "type": "select",
+      "id": "step_title_weight",
+      "label": "Step title weight",
+      "options": [
+        { "value": "400", "label": "Regular" },
+        { "value": "600", "label": "Semi-bold" },
+        { "value": "700", "label": "Bold" }
+      ],
+      "default": "600"
+    },
+    {
+      "type": "range",
+      "id": "body_size",
+      "label": "Description size",
+      "min": 13,
+      "max": 18,
+      "step": 1,
+      "unit": "px",
+      "default": 15
+    },
+    {
+      "type": "select",
+      "id": "body_weight",
+      "label": "Description weight",
+      "options": [
+        { "value": "300", "label": "Light" },
+        { "value": "400", "label": "Regular" },
+        { "value": "500", "label": "Medium" }
+      ],
+      "default": "400"
     },
     {
       "type": "header",

@@ -1498,5 +1498,169 @@
         "default": true
       }
     ]
+  },
+  {
+    "name": "Typography",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Headings"
+      },
+      {
+        "type": "range",
+        "id": "heading_size_hero",
+        "label": "Hero heading size",
+        "min": 40,
+        "max": 80,
+        "step": 4,
+        "unit": "px",
+        "default": 64
+      },
+      {
+        "type": "range",
+        "id": "heading_size_h1",
+        "label": "H1 size",
+        "min": 32,
+        "max": 64,
+        "step": 4,
+        "unit": "px",
+        "default": 48
+      },
+      {
+        "type": "range",
+        "id": "heading_size_h2",
+        "label": "H2 size",
+        "min": 24,
+        "max": 48,
+        "step": 4,
+        "unit": "px",
+        "default": 36
+      },
+      {
+        "type": "range",
+        "id": "heading_size_h3",
+        "label": "H3 size",
+        "min": 18,
+        "max": 36,
+        "step": 2,
+        "unit": "px",
+        "default": 24
+      },
+      {
+        "type": "select",
+        "id": "heading_weight",
+        "label": "Heading weight",
+        "options": [
+          { "value": "400", "label": "Regular (400)" },
+          { "value": "500", "label": "Medium (500)" },
+          { "value": "600", "label": "Semi-bold (600)" },
+          { "value": "700", "label": "Bold (700)" },
+          { "value": "800", "label": "Extra-bold (800)" }
+        ],
+        "default": "700"
+      },
+      {
+        "type": "select",
+        "id": "heading_letter_spacing",
+        "label": "Heading letter-spacing",
+        "options": [
+          { "value": "tight",  "label": "Tight (−0.02em)" },
+          { "value": "normal", "label": "Normal (0em)" },
+          { "value": "wide",   "label": "Wide (0.05em)" }
+        ],
+        "default": "tight"
+      },
+      {
+        "type": "select",
+        "id": "heading_text_transform",
+        "label": "Heading text transform",
+        "options": [
+          { "value": "none",      "label": "None" },
+          { "value": "uppercase", "label": "Uppercase" }
+        ],
+        "default": "none"
+      },
+      {
+        "type": "header",
+        "content": "Body"
+      },
+      {
+        "type": "range",
+        "id": "body_size",
+        "label": "Body font size",
+        "min": 13,
+        "max": 18,
+        "step": 1,
+        "unit": "px",
+        "default": 15
+      },
+      {
+        "type": "select",
+        "id": "body_weight",
+        "label": "Body weight",
+        "options": [
+          { "value": "300", "label": "Light (300)" },
+          { "value": "400", "label": "Regular (400)" },
+          { "value": "500", "label": "Medium (500)" }
+        ],
+        "default": "400"
+      },
+      {
+        "type": "select",
+        "id": "body_line_height",
+        "label": "Body line height",
+        "options": [
+          { "value": "1.4", "label": "Compact (1.4)" },
+          { "value": "1.6", "label": "Normal (1.6)" },
+          { "value": "1.8", "label": "Relaxed (1.8)" }
+        ],
+        "default": "1.6"
+      },
+      {
+        "type": "header",
+        "content": "Eyebrow / Label"
+      },
+      {
+        "type": "range",
+        "id": "eyebrow_size",
+        "label": "Eyebrow font size",
+        "min": 10,
+        "max": 14,
+        "step": 1,
+        "unit": "px",
+        "default": 11
+      },
+      {
+        "type": "select",
+        "id": "eyebrow_weight",
+        "label": "Eyebrow weight",
+        "options": [
+          { "value": "400", "label": "Regular (400)" },
+          { "value": "500", "label": "Medium (500)" },
+          { "value": "600", "label": "Semi-bold (600)" },
+          { "value": "700", "label": "Bold (700)" }
+        ],
+        "default": "600"
+      },
+      {
+        "type": "range",
+        "id": "eyebrow_letter_spacing",
+        "label": "Eyebrow letter-spacing (x0.01em)",
+        "min": 0,
+        "max": 30,
+        "step": 5,
+        "default": 15
+      },
+      {
+        "type": "select",
+        "id": "eyebrow_text_transform",
+        "label": "Eyebrow text transform",
+        "options": [
+          { "value": "none",      "label": "None" },
+          { "value": "uppercase", "label": "Uppercase" }
+        ],
+        "default": "uppercase"
+      }
+    ]
   }
 ]

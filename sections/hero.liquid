@@ -121,6 +121,17 @@
     {%- endif -%}
   }
 
+  /* ── Typography ─────────────────────────────────── */
+  .hero-{{ section.id }} .hero__heading {
+    font-size: {{ section.settings.heading_size }}px;
+    font-weight: {{ section.settings.heading_weight }};
+  }
+
+  .hero-{{ section.id }} .hero__subheading {
+    font-size: {{ section.settings.body_size }}px;
+    font-weight: {{ section.settings.body_weight }};
+  }
+
   /* ── Mobile ──────────────────────────────────────── */
   @media (max-width: 749px) {
     .hero-{{ section.id }} {
@@ -501,6 +512,53 @@
       "label": "Trust badge text",
       "default": "30-Day Money-Back Guarantee",
       "info": "Small text displayed below the buttons"
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "label": "Heading size",
+      "min": 32,
+      "max": 80,
+      "step": 4,
+      "unit": "px",
+      "default": 64
+    },
+    {
+      "type": "select",
+      "id": "heading_weight",
+      "label": "Heading weight",
+      "options": [
+        { "value": "400", "label": "Regular" },
+        { "value": "600", "label": "Semi-bold" },
+        { "value": "700", "label": "Bold" },
+        { "value": "800", "label": "Extra-bold" }
+      ],
+      "default": "800"
+    },
+    {
+      "type": "range",
+      "id": "body_size",
+      "label": "Subheading size",
+      "min": 14,
+      "max": 22,
+      "step": 1,
+      "unit": "px",
+      "default": 18
+    },
+    {
+      "type": "select",
+      "id": "body_weight",
+      "label": "Subheading weight",
+      "options": [
+        { "value": "300", "label": "Light" },
+        { "value": "400", "label": "Regular" },
+        { "value": "500", "label": "Medium" }
+      ],
+      "default": "400"
     },
     {
       "type": "header",
