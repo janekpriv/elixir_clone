@@ -1180,3 +1180,109 @@ a.elixir-rating-summary__count {
   margin: 0;
   font-weight: 500;
 }
+
+/* ============================================================
+   18. FAQ ACCORDION
+   ============================================================ */
+
+.faq {
+  overflow: hidden;
+}
+
+.faq__header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+/* Items */
+.faq__item {
+  border-bottom: 1px solid var(--color-elixir-border);
+  padding: 0;
+}
+
+.faq__item:first-child {
+  border-top: 1px solid var(--color-elixir-border);
+}
+
+/* Question button */
+.faq__question {
+  width: 100%;
+  background: none;
+  border: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.25rem 0;
+  color: var(--color-elixir-text);
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  text-align: left;
+  transition: color 0.2s ease;
+}
+
+.faq__question:hover {
+  color: var(--color-accent);
+}
+
+.faq__question-text {
+  flex: 1;
+}
+
+/* Icon */
+.faq__icon {
+  flex-shrink: 0;
+  width: 22px;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-accent);
+  transition: transform 0.3s ease;
+}
+
+.faq__icon svg {
+  width: 22px;
+  height: 22px;
+}
+
+/* Plus/minus: show plus by default, hide minus; swap when open */
+.faq__icon-minus {
+  display: none;
+}
+
+.faq__item.is-open .faq__icon-plus {
+  display: none;
+}
+
+.faq__item.is-open .faq__icon-minus {
+  display: block;
+}
+
+/* Chevron rotates 180° when open */
+[data-icon="chevron"] .faq__item.is-open .faq__icon {
+  transform: rotate(180deg);
+}
+
+/* Answer panel */
+.faq__answer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease;
+}
+
+.faq__answer-inner {
+  padding-bottom: 1.25rem;
+  color: var(--color-elixir-text-muted);
+  line-height: 1.7;
+  font-size: 0.95rem;
+}
+
+.faq__answer-inner p {
+  margin: 0 0 0.75rem;
+}
+
+.faq__answer-inner p:last-child {
+  margin-bottom: 0;
+}
