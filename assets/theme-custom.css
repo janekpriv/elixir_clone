@@ -2178,3 +2178,350 @@ a.elixir-rating-summary__count {
   flex-direction: column;
   gap: 0.5rem;
 }
+
+/* ============================================================
+   PRODUCT PAGE LAYOUT
+   ============================================================ */
+
+.template-product .section-{{ section.id }}-padding,
+.template-product main {
+  background-color: #0d1117;
+}
+
+/* ── Two-column grid ──────────────────────────────────────── */
+.elixir-product-layout {
+  display: grid;
+  grid-template-columns: 55fr 45fr;
+  gap: 48px;
+  align-items: start;
+  padding: 40px 0 80px;
+}
+
+@media (max-width: 749px) {
+  .elixir-product-layout {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    padding: 24px 0 60px;
+  }
+}
+
+/* ── Gallery left column ──────────────────────────────────── */
+.elixir-product-gallery {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  position: sticky;
+  top: 80px;
+}
+
+@media (max-width: 749px) {
+  .elixir-product-gallery { position: static; }
+}
+
+.elixir-gallery__main {
+  background: #1a1f2e;
+  border-radius: 12px;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.elixir-gallery__main-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+.elixir-gallery__placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.3;
+}
+
+.elixir-gallery__thumbs {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+}
+
+.elixir-gallery__thumb {
+  flex-shrink: 0;
+  width: 72px;
+  height: 72px;
+  border-radius: 8px;
+  background: #1a1f2e;
+  border: 2px solid transparent;
+  overflow: hidden;
+  cursor: pointer;
+  padding: 0;
+  opacity: 0.65;
+  transition: opacity 0.18s, border-color 0.18s;
+}
+
+.elixir-gallery__thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+.elixir-gallery__thumb.is-active {
+  border-color: var(--color-accent);
+  opacity: 1;
+}
+
+.elixir-gallery__thumb:hover {
+  opacity: 1;
+  border-color: rgba(0, 229, 255, 0.5);
+}
+
+/* ── Product info right column ────────────────────────────── */
+.elixir-product-info {
+  padding-top: 4px;
+}
+
+.elixir-product-info .product__info-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* ── Rating summary ───────────────────────────────────────── */
+.elixir-rating-summary {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  font-size: 14px;
+}
+
+.elixir-rating-summary__stars {
+  display: flex;
+  gap: 2px;
+}
+
+.elixir-star--full,
+.elixir-star--half { color: #FFB800; }
+
+.elixir-star--empty { color: rgba(255, 184, 0, 0.2); }
+
+.elixir-rating-summary__rated {
+  color: var(--color-elixir-text);
+}
+
+.elixir-rating-summary__sep {
+  color: var(--color-elixir-text-secondary);
+}
+
+.elixir-rating-summary__reviews {
+  color: var(--color-accent);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+/* ── Product title ────────────────────────────────────────── */
+.elixir-product-info .product__title h1 {
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--color-elixir-text);
+  margin: 0;
+  line-height: 1.1;
+}
+
+.elixir-product-info .product__title > a {
+  display: none;
+}
+
+/* ── Short description ────────────────────────────────────── */
+.elixir-product-info .product__description {
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--color-elixir-text-secondary);
+  margin: 0;
+}
+
+/* ── Benefit pills ────────────────────────────────────────── */
+.elixir-benefit-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 20px;
+  padding: 6px 14px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--color-elixir-text);
+  line-height: 1;
+}
+
+.elixir-benefit-pill__check {
+  color: var(--color-accent);
+  flex-shrink: 0;
+}
+
+/* ── Variant picker override ──────────────────────────────── */
+.elixir-product-info .product-form__input--swatch .swatch-input__input + label,
+.elixir-product-info .product-form__input--pill .swatch-input__input + label {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: var(--color-elixir-text);
+  border-radius: 6px;
+}
+
+.elixir-product-info .product-form__input--swatch .swatch-input__input:checked + label,
+.elixir-product-info .product-form__input--pill .swatch-input__input:checked + label {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+  color: #000;
+}
+
+/* ── Delivery estimate ────────────────────────────────────── */
+.elixir-delivery {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(34, 197, 94, 0.10);
+  border: 1px solid rgba(34, 197, 94, 0.30);
+  border-radius: 999px;
+  padding: 8px 16px;
+  color: #22c55e;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.elixir-delivery__dot { font-size: 9px; }
+
+/* ── Elixir ATC button ────────────────────────────────────── */
+.elixir-atc__form form { margin: 0; }
+
+.elixir-atc__btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  height: 56px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  transition: filter 0.18s, transform 0.18s;
+}
+
+.elixir-atc__btn:hover:not(:disabled) {
+  filter: brightness(1.1);
+  transform: translateY(-1px);
+}
+
+.elixir-atc__btn:active:not(:disabled) { transform: translateY(0); }
+
+.elixir-atc__btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.elixir-atc__btn--silver {
+  background: linear-gradient(135deg, #c8d6e5, #8395a7);
+  color: #000000;
+}
+
+.elixir-atc__btn--cyan {
+  background: var(--color-accent);
+  color: #000000;
+}
+
+.elixir-atc__btn--white {
+  background: #ffffff;
+  color: #000000;
+}
+
+.elixir-atc__icon { flex-shrink: 0; }
+
+.elixir-atc__compare {
+  font-weight: 400;
+  opacity: 0.65;
+}
+
+/* ── Trust inline row ─────────────────────────────────────── */
+.elixir-trust-inline {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  margin-top: 12px;
+  font-size: 12px;
+  color: var(--color-elixir-text-secondary);
+}
+
+/* ── Payment icons ────────────────────────────────────────── */
+.elixir-payment-icons {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 10px;
+  opacity: 0.65;
+}
+
+.elixir-payment-icons__icon,
+.elixir-payment-icons svg {
+  height: 24px;
+  width: auto;
+}
+
+/* ── Product tabs ─────────────────────────────────────────── */
+.elixir-tabs {
+  margin-top: 8px;
+}
+
+.elixir-tabs__bar {
+  display: flex;
+  border-bottom: 1px solid var(--color-elixir-border);
+}
+
+.elixir-tabs__tab {
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  padding: 14px 22px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--color-elixir-text-secondary);
+  cursor: pointer;
+  transition: color 0.18s, border-color 0.18s;
+  margin-bottom: -1px;
+  white-space: nowrap;
+  line-height: 1;
+}
+
+.elixir-tabs__tab:hover { color: var(--color-elixir-text); }
+
+.elixir-tabs__tab.is-active {
+  color: var(--color-accent);
+  border-bottom-color: var(--color-accent);
+  font-weight: 600;
+}
+
+.elixir-tabs__panel {
+  display: none;
+  padding: 20px 0;
+  color: var(--color-elixir-text-secondary);
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.elixir-tabs__panel.is-active { display: block; }
