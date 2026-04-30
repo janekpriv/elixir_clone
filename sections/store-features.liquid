@@ -63,6 +63,18 @@
     font-size: {{ section.settings.body_size }}px;
     font-weight: {{ section.settings.body_weight }};
   }
+
+  @media (max-width: 749px) {
+    .store-features-{{ section.id }} .store-features__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    {%- if section.settings.hide_description_mobile -%}
+      .store-features-{{ section.id }} .store-features__desc {
+        display: none;
+      }
+    {%- endif -%}
+  }
 {%- endstyle -%}
 
 <div
@@ -188,6 +200,12 @@
       "type": "checkbox",
       "id": "show_description",
       "label": "Show description text",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "hide_description_mobile",
+      "label": "Hide description on mobile",
       "default": true
     },
     {

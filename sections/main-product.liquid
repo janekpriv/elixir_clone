@@ -875,7 +875,7 @@
               {%- when 'elixir_atc' -%}
                 {%- assign elixir_cur_variant = product.selected_or_first_available_variant -%}
                 {%- assign elixir_atc_id = 'ElixirAtcForm-' | append: section.id -%}
-                <div class="elixir-atc"
+                <div class="elixir-atc elixir-atc--sticky-mobile"
                      {{ block.shopify_attributes }}
                      data-elixir-atc
                      data-section="{{ section.id }}"

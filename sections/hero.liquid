@@ -136,6 +136,7 @@
   @media (max-width: 749px) {
     .hero-{{ section.id }} {
       min-height: 70vh;
+      min-height: 100svh;
     }
 
     .hero-{{ section.id }} .hero__split {
@@ -144,16 +145,35 @@
 
     .hero-{{ section.id }} .hero__split-image {
       order: -1;
+      max-height: 45vh;
+      max-height: 45svh;
+      overflow: hidden;
+    }
+
+    .hero-{{ section.id }} .hero__split-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
 
     .hero-{{ section.id }} .hero__content {
       max-width: 100%;
     }
 
+    .hero-{{ section.id }} .hero__heading {
+      font-size: clamp(1.75rem, 8vw, 3.5rem);
+    }
+
+    .hero-{{ section.id }} .hero__cta-row {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
     .hero-{{ section.id }} .hero__cta-row .btn-primary,
     .hero-{{ section.id }} .hero__cta-row .btn-secondary {
       width: 100%;
       justify-content: center;
+      min-height: 48px;
     }
   }
 {%- endstyle -%}
