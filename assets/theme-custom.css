@@ -2645,6 +2645,8 @@ img {
     bottom: 0;
     left: 0;
     right: 0;
+    width: 100%;
+    box-sizing: border-box;
     z-index: 200;
     background: rgba(10, 10, 10, 0.97);
     backdrop-filter: blur(16px);
@@ -2678,12 +2680,12 @@ img {
     overflow: hidden;
   }
 
-  /* Grid columns: can shrink to 0, no blowout */
+  /* Grid columns: can shrink to 0, no blowout.
+     No overflow:hidden here — it would break position:fixed on sticky ATC. */
   .elixir-product-gallery,
   .elixir-product-info {
     min-width: 0;
     max-width: 100%;
-    overflow: hidden;
   }
 
   /* Gallery thumbnails row: allow horizontal scroll, not clip */
