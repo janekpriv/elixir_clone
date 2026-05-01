@@ -2906,3 +2906,350 @@ img {
     padding-bottom: 80px;
   }
 }
+
+/* ============================================================
+   25. HEADER ELIXIR
+   ============================================================ */
+
+/* ── Section wrapper: always fixed ────────────────────────── */
+.section-header {
+  position: fixed !important;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  z-index: 1000;
+  margin-bottom: 0 !important;
+}
+
+/* Body offset so content starts below the fixed header */
+body {
+  padding-top: 64px;
+}
+
+@media screen and (max-width: 989px) {
+  body {
+    padding-top: 56px;
+  }
+}
+
+/* ── Header wrapper: base state (transparent) ──────────────── */
+.header-wrapper {
+  background: transparent !important;
+  border-bottom: 1px solid transparent !important;
+  transition:
+    background 300ms ease,
+    border-color 300ms ease,
+    backdrop-filter 300ms ease,
+    box-shadow 300ms ease;
+}
+
+/* Remove Dawn's color-scheme background */
+.header-wrapper.gradient,
+.header-wrapper[class*="color-"] {
+  background: transparent !important;
+}
+
+/* ── Sticky state: glassmorphism (added by header-elixir.js) ─ */
+.header-wrapper.is-sticky {
+  background: rgba(8, 8, 8, 0.92) !important;
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+  border-bottom-color: rgba(255, 255, 255, 0.06) !important;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4) !important;
+}
+
+/* ── Inner header: 3-column grid (desktop ≥990px) ─────────── */
+@media screen and (min-width: 990px) {
+  .header {
+    display: grid !important;
+    grid-template-columns: 1fr auto 1fr !important;
+    align-items: center !important;
+    height: 64px !important;
+    padding-block: 0 !important;
+    padding-inline: 24px !important;
+    gap: 0 !important;
+    max-width: 100% !important;
+  }
+
+  /* Logo → column 1 */
+  .header__heading {
+    grid-column: 1;
+    grid-row: 1;
+    justify-self: start;
+    margin: 0;
+  }
+
+  /* On non-index pages the heading-link is a direct child of .header */
+  .header > .header__heading-link {
+    grid-column: 1;
+    grid-row: 1;
+    justify-self: start;
+  }
+
+  /* Nav → column 2 */
+  .header__inline-menu,
+  nav.header__inline-menu {
+    grid-column: 2;
+    grid-row: 1;
+    justify-self: center;
+  }
+
+  /* Icons → column 3 */
+  .header__icons {
+    grid-column: 3;
+    grid-row: 1;
+    justify-self: end;
+  }
+
+  /* Drawer-hamburger hidden on desktop (Dawn already does this,
+     but belt-and-suspenders so it doesn't occupy a grid column) */
+  header-drawer {
+    display: none !important;
+  }
+}
+
+/* ── Logo ──────────────────────────────────────────────────── */
+.header__heading-link {
+  text-decoration: none !important;
+  display: flex !important;
+  align-items: center;
+}
+
+.header__heading-logo {
+  display: block;
+  height: auto;
+}
+
+/* Text logo fallback */
+.header__heading .h2,
+.header__heading-link .h2,
+.header .header__heading-link > span.h2 {
+  font-weight: 800 !important;
+  font-size: 20px !important;
+  letter-spacing: -0.02em !important;
+  color: #ffffff !important;
+  white-space: nowrap;
+}
+
+/* ── Desktop nav links ─────────────────────────────────────── */
+.header__inline-menu .list-menu--inline {
+  display: flex !important;
+  flex-wrap: nowrap;
+  gap: 32px;
+  align-items: center;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.header__inline-menu .list-menu__item--link {
+  position: relative;
+  color: rgba(255, 255, 255, 0.85) !important;
+  text-decoration: none !important;
+  letter-spacing: 0.01em;
+  padding-block: 4px !important;
+  line-height: 1.4 !important;
+  transition: color 200ms ease;
+  white-space: nowrap;
+}
+
+/* Animated underline */
+.header__inline-menu .list-menu__item--link::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--color-accent, #00e5ff);
+  transition: width 250ms ease;
+  border-radius: 2px;
+}
+
+.header__inline-menu .list-menu__item--link:hover {
+  color: #ffffff !important;
+}
+
+.header__inline-menu .list-menu__item--link:hover::after {
+  width: 100%;
+}
+
+/* Active / current page link */
+.header__inline-menu .list-menu__item--link.header__active-menu-item {
+  color: #ffffff !important;
+  font-weight: 600 !important;
+}
+
+.header__inline-menu .list-menu__item--link.header__active-menu-item::after {
+  width: 100%;
+}
+
+/* ── Icon buttons ──────────────────────────────────────────── */
+.header__icon {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 40px !important;
+  height: 40px !important;
+  border-radius: 8px !important;
+  background: transparent !important;
+  color: rgba(255, 255, 255, 0.85) !important;
+  border: none;
+  cursor: pointer;
+  text-decoration: none !important;
+  position: relative !important;
+  transition: background 200ms ease, color 200ms ease !important;
+  flex-shrink: 0;
+}
+
+.header__icon:hover {
+  background: rgba(255, 255, 255, 0.08) !important;
+  color: #ffffff !important;
+}
+
+.header__icon .svg-wrapper,
+.header__icon svg {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+}
+
+.header__icon .svg-wrapper svg,
+.header__icon > svg {
+  width: 20px !important;
+  height: 20px !important;
+  display: block !important;
+}
+
+/* Icons container */
+.header__icons {
+  display: flex !important;
+  align-items: center;
+  gap: 4px;
+}
+
+/* Hide localization wrappers */
+.header__icons .desktop-localization-wrapper {
+  display: none;
+}
+
+/* ── Cart badge ────────────────────────────────────────────── */
+.cart-count-bubble {
+  position: absolute !important;
+  top: -6px !important;
+  right: -6px !important;
+  background: var(--color-accent, #00e5ff) !important;
+  color: #000000 !important;
+  font-size: 10px !important;
+  font-weight: 700 !important;
+  min-width: 18px !important;
+  height: 18px !important;
+  border-radius: 50% !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 0 4px !important;
+  line-height: 1 !important;
+  pointer-events: none;
+  box-sizing: border-box !important;
+}
+
+/* ── Mobile header (max 989px) ─────────────────────────────── */
+@media screen and (max-width: 989px) {
+  .header {
+    display: grid !important;
+    grid-template-columns: 40px 1fr 40px !important;
+    align-items: center !important;
+    height: 56px !important;
+    padding-block: 0 !important;
+    padding-inline: 16px !important;
+    gap: 8px !important;
+  }
+
+  /* Hamburger → column 1 */
+  header-drawer {
+    grid-column: 1;
+    grid-row: 1;
+    justify-self: start;
+    margin-left: 0 !important;
+    display: flex !important;
+  }
+
+  /* Logo → column 2, centered */
+  .header__heading {
+    grid-column: 2;
+    grid-row: 1;
+    justify-self: center;
+    text-align: center;
+    margin: 0;
+  }
+
+  .header > .header__heading-link {
+    grid-column: 2;
+    grid-row: 1;
+    justify-self: center;
+  }
+
+  /* Nav hidden on mobile */
+  .header__inline-menu {
+    display: none !important;
+  }
+
+  /* Icons → column 3, show only cart */
+  .header__icons {
+    grid-column: 3;
+    grid-row: 1;
+    justify-self: end;
+    gap: 0;
+  }
+
+  .header__icon--account,
+  .header__icon--search {
+    display: none !important;
+  }
+
+  /* Logo max-width on mobile */
+  .header__heading-logo {
+    max-width: 140px;
+  }
+}
+
+/* ── Mobile drawer (Dawn's menu-drawer) ────────────────────── */
+.menu-drawer {
+  background: rgba(8, 8, 8, 0.98) !important;
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+  border-right: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+
+.menu-drawer .list-menu__item--link {
+  font-size: 18px !important;
+  padding: 16px 24px !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06) !important;
+  color: rgba(255, 255, 255, 0.85) !important;
+  text-decoration: none !important;
+  display: block;
+  line-height: 1.4;
+}
+
+.menu-drawer .list-menu__item--link:hover {
+  color: #ffffff !important;
+  background: rgba(255, 255, 255, 0.04) !important;
+}
+
+/* Drawer header / close button */
+.menu-drawer .drawer__inner-lower {
+  background: rgba(8, 8, 8, 0.98) !important;
+}
+
+/* ── Dawn overrides: remove default header bg ──────────────── */
+.header-wrapper--border-bottom {
+  border-bottom-color: transparent !important;
+}
+
+/* Dawn's scrolled-past / sticky classes — let our system handle bg */
+.shopify-section-header-sticky .header-wrapper,
+.scrolled-past-header .header-wrapper {
+  /* don't add bg here; .is-sticky from our JS handles it */
+}
